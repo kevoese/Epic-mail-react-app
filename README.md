@@ -1,2 +1,3 @@
 # Epic-mail-react-app
-epic mail app using react
+Epic mail app using react and sass css extension
+
