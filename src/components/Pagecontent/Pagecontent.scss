@@ -1,0 +1,58 @@
+.pageContent {
+  position: absolute;
+  color: rgba(255, 255, 255, 1);
+  text-align: left;
+  width: 56%;
+  animation: opace 0.5s 2s ease-out both;
+  transform: scale(1) translateY(-30%);
+  margin-left: 5%;
+	h2 {
+    font-weight: 100;
+    color: white;
+		font-size: 5em;
+		margin: 50px auto 20px;
+		text-shadow: 2px 2px 5px rgba(209, 255, 255, 0.6);
+  }
+  
+  p {
+    font-size: 1em;
+    font-family: myfont;
+    flex-wrap: wrap;
+    font-weight: 100;
+    margin: 0px 0px 1.2em;
+    color: white;
+  }
+ 
+  .register {
+    margin: 1.1em 0;
+    padding: 0.5em 1em;
+    box-shadow: 5px 5px 5px rgba(236, 234, 234, 0.336);
+    width: 8em;
+    text-align: left;
+    background-color: transparent;
+    border: 1px solid white;
+    transition: all linear 0.3s;
+    font-size: 1em;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.897);
+    background-color: rgb(4, 161, 161);
+  }
+  
+  &::after {
+    content: '\f054';
+    display: inline-block;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20%;
+    position: absolute;
+    transition: right linear 0.3s;
+  }
+  
+  &:hover::after {
+    right: 10%;
+  }
+}
+}
+
+

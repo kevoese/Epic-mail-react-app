@@ -1,13 +1,23 @@
+require('dotenv').config();
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+let isDevelopment = false;
+
+if (['staging', 'review', 'production'].includes(process.env.NODE_ENV)) isDevelopment = false;
+else isDevelopment = true;
 
 module.exports = {
+  mode: isDevelopment ? 'development' : 'production',
   entry: path.join(__dirname, 'src', 'app.js'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.bundle.js',
   },
-  mode: process.env.NODE_ENV || 'development',
   module: {
     rules: [
       {
@@ -15,14 +25,56 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.s(a|c)ss$/,
+        use: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDevelopment,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|otf|ttf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
+      },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.scss'],
   },
   devServer: {
     contentBase: path.join(__dirname, 'src'),
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
+    new MiniCssExtractPlugin({
+      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
+      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
+    }),
   ],
+  optimization: {
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
+  },
 };

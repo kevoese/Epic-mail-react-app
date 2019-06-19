@@ -1,0 +1,199 @@
+.form {
+	flex: 1 1 50%;
+	min-width: 400px;
+	max-width: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+	overflow: hidden;
+	position: relative;
+
+
+	.input {
+		display: block;
+		font-family: cambria;
+		font-size: 1em;
+		border: none;
+		color: rgb(17, 17, 17);
+		background-color: transparent;
+		border-bottom: 1px solid rgba(39, 39, 39, 0.4);
+		width: 22em;
+		min-width: 20em;
+		padding: 0.5em;
+		margin: 2em auto;
+
+		&:hover {
+			box-shadow: 0px 4px 7px -5px rgba(0, 0, 0, 0.5);
+		}
+	}
+	::-webkit-input-placeholder {
+		color: rgba(11, 11, 15, 0.8);
+		font-size: 0.9em;
+	}
+
+	.linfo {
+		position: relative;
+		color: var(--myLightColor);
+	}
+
+	.validIcon {
+		color: var(--myColor) ;
+	}
+
+	.fname {
+		&::after {
+			content: '\f007';
+		}
+	}
+
+	.lname {
+		&::after {
+			content: '\f007';
+		}
+	}
+
+	.username {
+		&::before {
+			content: '@epicmail.com';
+			position: absolute;
+			right: 10%;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #171717 !important;
+		}
+		&::after {
+			content: '\f007';
+		}
+		input {
+			padding-right: 60% !important;
+		}
+	}
+
+	.emailicon {
+		&::after {
+			content: '\f0e0';
+		}
+	}
+
+	.passwrd {
+		&::after {
+			content: '\f023';
+		}
+	}
+
+	.spasswrd {
+		&::after {
+			content: '\f023';
+			top: 0;
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 900;
+			display: inline-block;
+			font-style: normal;
+			font-variant: normal;
+			text-rendering: auto;
+			-webkit-font-smoothing: antialiased;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 8%;
+			position: absolute;
+		}
+	}
+
+	.showform {
+		transform: scale(1);
+		opacity: 1;
+	}
+
+	h2 {
+		color: var(--myColor);
+	}
+
+	.mobilebtn {
+		margin: 0.5em;
+		text-align: center;
+		display: none;
+		width: 90%;
+		justify-content: center;
+		align-items: center;
+		font-size: 1em;
+		font-family: cambria;
+		font-style: italic;
+		color: var(--myColor);
+	}
+
+	.mobilebtn span {
+		border: none;
+		background-color: transparent;
+		font-size: 1em;
+		font-family: cambria;
+		font-style: italic;
+		cursor: pointer;
+		color: var(--myColor);
+		padding: 5px;
+		margin-left: 0.2em;
+	}
+
+	.mobilebtn span:hover {
+		border-bottom: 1px solid var(--myColor);
+	}
+
+	.slider h3 {
+		font-size: 2em;
+		font-family: myfont;
+		color: whitesmoke;
+		margin-bottom: 0.5em;
+	}
+
+	.slider img {
+		width: 10em;
+		height: 10em;
+		margin: 0 auto;
+	}
+
+	.slider h2 {
+		font-family: myitalic;
+		font-weight: 100;
+		color: white;
+		flex-wrap: wrap;
+		font-size: 4.5em;
+		text-align: center;
+		margin-bottom: 0.2em;
+	}
+
+	.wrongemail {
+		input {
+			border: 1px solid red;
+			animation: wrong 0.4s 0.2s linear backwards;
+		}
+	}
+
+	.mobilebtn {
+		margin: 0.5em;
+		text-align: center;
+		display: none;
+		width: 90%;
+		justify-content: center;
+		align-items: center;
+		font-size: 1em;
+		font-family: cambria;
+		font-style: italic;
+    color: var(--myColor);
+    
+		span {
+			border: none;
+			background-color: transparent;
+			font-size: 1em;
+			font-family: cambria;
+			font-style: italic;
+			cursor: pointer;
+			color: var(--myColor);
+			padding: 5px;
+			margin-left: 0.2em;
+
+			&:hover {
+				border-bottom: 1px solid var(--myColor);
+			}
+		}
+	}
+}

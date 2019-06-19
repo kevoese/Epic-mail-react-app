@@ -1,11 +1,20 @@
 module.exports = {
-  extends: ['airbnb-base', 'plugin:react/recommended'],
-  env: {
-    es6: true,
-  },
+  root: true,
+  extends: ['airbnb-base', 'prettier', 'plugin:react/recommended'],
   plugins: ['prettier'],
+  env: {
+    node: true,
+    es6: true,
+    mocha: true,
+    browser: true,
+  },
+  settings: {
+    'import/ignore': ['.scss', '.css'],
+  },
   rules: {
-    'prettier/prettier': ['error'],
+    'react/prop-types': 0,
+    'class-methods-use-this': 0,
+    'require-jsdoc': 0,
     'one-var': 0,
     'linebreak-style': 0,
     'one-var-declaration-per-line': 0,
@@ -15,24 +24,24 @@ module.exports = {
     'no-param-reassign': 0,
     'comma-dangle': 0,
     curly: ['error', 'multi-line'],
-    'import/no-unresolved': [2, { commonjs: true }],
+    'import/no-unresolved': 0,
     'no-shadow': ['error', { allow: ['req', 'res', 'err'] }],
     'valid-jsdoc': [
       'error',
       {
-        requireReturn: true,
-        requireReturnType: true,
+        requireReturn: false,
+        requireReturnType: false,
         requireParamDescription: false,
-        requireReturnDescription: true,
+        requireReturnDescription: false,
       },
     ],
     'require-jsdoc': [
       'error',
       {
         require: {
-          FunctionDeclaration: true,
-          MethodDefinition: true,
-          ClassDeclaration: true,
+          FunctionDeclaration: false,
+          MethodDefinition: false,
+          ClassDeclaration: false,
         },
       },
     ],
