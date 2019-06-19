@@ -1,0 +1,40 @@
+.footer {
+	display: grid;
+	grid-template-columns: 20% 20%;
+	position: relative;
+	left: 7%;
+	width: 80%;
+	color: rgba(255, 255, 255, 0.8);
+	font-family: myfont;
+	font-size: 0.9em;
+	margin-bottom: 3em;
+
+	div {
+		white-space: nowrap;
+		animation: opace 0.4s 1.5s linear both;
+		position: relative;
+
+		div::after {
+			font-size: 2.5em;
+			color: white;
+			left: 0;
+			position: absolute;
+			transform: translateY(-120%);
+		}
+
+		.allhrs {
+			&::after {
+				content: '24';
+				font-family: serif;
+			}
+		}
+
+		.secure {
+			color: blueviolet;
+			&::after {
+        content: '\f3ed';
+        transform: translateY(-135%);
+			}
+		}
+	}
+}

@@ -1,11 +1,12 @@
-/* eslint-disable no-undef */
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
+import Landing from './pages/Landing';
+import './styles/App.scss';
 
 const App = () => (
-  <React.Fragment>
-    <h1>Hello epic mail</h1>
-  </React.Fragment>
+  <Fragment>
+    <Landing />
+  </Fragment>
 );
 
 ReactDOM.render(<App />, document.getElementById('root'));

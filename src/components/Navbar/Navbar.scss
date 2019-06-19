@@ -1,0 +1,17 @@
+.nav {
+  min-width: 100%;
+  display:flex;
+  justify-content: space-between;
+  margin: 0.7em auto 0;
+ padding: 0.5em 1.5em;
+  .contactlink {
+    color: white;
+    font-family: cambria;
+    border-bottom: 1px solid white;
+    padding: 0.4em 0.3em;
+    font-size: 0.9em;
+    cursor: pointer;
+    height: 2em;
+  }
+}
+

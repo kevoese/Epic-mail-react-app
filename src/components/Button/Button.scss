@@ -1,0 +1,17 @@
+.btn {
+  font-family: cambria;
+  font-size: 0.75em;
+  white-space: nowrap;
+  padding: 1em 3em;
+  cursor: pointer;
+  display: block;
+  color: white;
+  position: relative;
+  background-color: var(--myColor);
+  border: 1px solid var(--myColor);
+  border-radius: 3em;
+
+&:hover {
+  box-shadow: 4px 4px 7px -3px rgba(0, 0, 0, 0.5);
+}
+}
