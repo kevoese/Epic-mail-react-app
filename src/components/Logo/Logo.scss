@@ -1,0 +1,25 @@
+.logo {
+  font-family: mylogo;
+  font-weight: bold;
+	font-size: 0.9em;
+	white-space: nowrap;
+	padding: 0.6em 0 0.6em 3em;
+	width: 6em;
+	color: white;
+	z-index: 2;
+	text-align: right;
+	background: url(../../images/elogo.png) no-repeat;
+	background-position: 0%;
+	background-size: 60%;
+	cursor: pointer;
+
+	a {
+		color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .logo-italic {
+    font-family: myitalic !important;
+    font-size: 2em;
+    font-weight: 500;
+  }
+}
