@@ -6,6 +6,7 @@ import Pagecontent from '@components/Pagecontent';
 import Button from '@components/Button';
 import Form from '@components/Form';
 import Input from '@components/Form/input';
+import axios from 'axios';
 
 class Landing extends Component {
   state = {
@@ -13,15 +14,82 @@ class Landing extends Component {
     hidePageContent: false,
     signupForm: true,
     slideDelay: false,
+    isSubmitting: false,
+    errorMessage: '',
+    isLogin: false,
+    isError: false,
     formInfo: {
-      firstName: '',
-      lastName: '',
-      recoveryEmail: '',
+      firstname: '',
+      lastname: '',
+      alternativeEmail: '',
       username: '',
       password: '',
       logEmail: '',
       logPassword: '',
     },
+  };
+
+  resetForm = () => {
+    this.setState({
+      formInfo: {
+        firstname: '',
+        lastname: '',
+        alternativeEmail: '',
+        username: '',
+        password: '',
+        logEmail: '',
+        logPassword: '',
+      },
+    });
+  };
+
+  axiosCall = async (url, details) => {
+    let result;
+    try {
+      result = await axios.post(url, details);
+      console.log('here', result && result.data && result.data.data && result.data.data.Token);
+      this.resetForm();
+    } catch ({ response }) {
+      this.setState({
+        isError: true,
+        errorMessage: response && response.data && response.data.error,
+      });
+      result = false;
+    }
+    this.setState({
+      isSubmitting: false,
+    });
+    return result;
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+
+    const {
+      firstname,
+      lastname,
+      alternativeEmail,
+      password,
+      username,
+      logEmail,
+      logPassword,
+    } = this.state.formInfo;
+    this.setState({
+      isSubmitting: true,
+      isError: false,
+      isLogin: event.target.id === 'formLogin',
+    });
+
+    const url =
+      event.target.id === 'formLogin'
+        ? 'https://epicmailappbykelvin.herokuapp.com/api/v2/auth/login'
+        : 'https://epicmailappbykelvin.herokuapp.com/api/v2/auth/signup';
+    const details =
+      event.target.id === 'formLogin'
+        ? { email: logEmail, password: logPassword }
+        : { firstname, lastname, email: `${username}@epicmail.com`, password, alternativeEmail };
+    const result = await this.axiosCall(url, details);
+    console.log('login state', this.state.isLogin);
   };
 
   handleJoin = () => {
@@ -40,7 +108,6 @@ class Landing extends Component {
   };
 
   switchForms = () => {
-    console.log();
     this.setState({
       slideDelay: true,
     });
@@ -55,15 +122,24 @@ class Landing extends Component {
   };
 
   render() {
-    const { showForm, slideDelay, signupForm, formInfo } = this.state;
     const {
-      firstName,
-      lastName,
-      recoveryEmail,
+      showForm,
+      slideDelay,
+      signupForm,
+      formInfo,
+      isError,
+      isSubmitting,
+      errorMessage,
+    } = this.state;
+    const {
+      firstname,
+      lastname,
+      alternativeEmail,
       password,
       username,
       logEmail,
       logPassword,
+      isLogin,
     } = formInfo;
     return (
       <div className="bg-color landing-page">
@@ -80,7 +156,7 @@ class Landing extends Component {
             ) : (
               <div className="formswrap">
                 <div onClick={() => this.setState({ showForm: false })} className="cut icon"></div>
-                <Form>
+                <Form onSubmit={this.handleSubmit} isSubmitting={isSubmitting} id="formLogin">
                   <Input
                     id="logEmail"
                     value={logEmail}
@@ -95,17 +171,25 @@ class Landing extends Component {
                     id="logPassword"
                     onChange={this.handleChange}
                     value={logPassword}
-                    classes="passwrd "
+                    classes="passwrd"
                     type="password"
                     placeholder="Password"
                     required
                   />
-                  <Button classes="">LOGIN</Button>
+                  <Button isSubmitting={isSubmitting} classes="">
+                    {isSubmitting ? 'Loading...' : 'LOGIN'}
+                  </Button>
+                  {isError && <p className="invalid">{errorMessage}</p>}
                 </Form>
-                <Form signup={true}>
+                <Form
+                  onSubmit={this.handleSubmit}
+                  isSubmitting={isSubmitting}
+                  id="formRegister"
+                  signup={true}
+                >
                   <Input
-                    id="firstName"
-                    value={firstName}
+                    id="firstname"
+                    value={firstname}
                     onChange={this.handleChange}
                     type="text"
                     pattern="^[\w]{3,20}$"
@@ -114,8 +198,8 @@ class Landing extends Component {
                     title="name must contain 3 to 20 characters"
                   />
                   <Input
-                    id="lastName"
-                    value={lastName}
+                    id="lastname"
+                    value={lastname}
                     onChange={this.handleChange}
                     type="text"
                     pattern="^[\w]{3,20}$"
@@ -134,8 +218,8 @@ class Landing extends Component {
                     title="Username must contain 3 to 20 characters"
                   />
                   <Input
-                    id="recoveryEmail"
-                    value={recoveryEmail}
+                    id="alternativeEmail"
+                    value={alternativeEmail}
                     onChange={this.handleChange}
                     type="text"
                     pattern="^\w+@[\w]{2,20}.[a-z]{2,5}$"
@@ -148,11 +232,17 @@ class Landing extends Component {
                     value={password}
                     onChange={this.handleChange}
                     classes="passwrd"
+                    pattern="^[\w@.]{7,20}$"
                     type="password"
                     placeholder="Password"
                     required
                   />
-                  <Button classes="">SIGN UP NOW</Button>
+                  <Button isSubmitting={isSubmitting} classes="">
+                    {' '}
+                    {isSubmitting ? 'Loading...' : 'SIGN UP NOW'}
+                  </Button>
+
+                  {isError && <p className="invalid">{errorMessage}</p>}
                 </Form>
 
                 <div className={`slider ${signupForm ? 'moveright' : 'moveleft'}`}>
@@ -160,7 +250,11 @@ class Landing extends Component {
                   <div className="bg-vector"></div>
                   <div className="logHere">
                     <h3> {!signupForm ? 'Not a member?' : 'Already a member'} </h3>
-                    <Button isSubmitting={slideDelay} onClick={this.switchForms} className="regbtn">
+                    <Button
+                      isSubmitting={slideDelay || isSubmitting}
+                      onClick={this.switchForms}
+                      className="regbtn"
+                    >
                       {!signupForm ? 'Click here to register' : 'Click here to login'}
                     </Button>
                   </div>

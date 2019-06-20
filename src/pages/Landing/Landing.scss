@@ -114,6 +114,32 @@
 				box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.671);
 				padding: 0em;
 
+				.loader {
+					overflow: hidden;
+					position: relative;
+				}
+
+				.loader::before {
+					content: ' ';
+					background-color: var(--myColor);
+					height: 8px;
+					width: 100%;
+					border-radius: 5px 5px 0 0;
+					position: absolute;
+					top: 0em;
+					transform: translateX(-50%);
+					animation: load 1.6s 0.2s linear infinite;
+				}
+
+				@keyframes load {
+					from {
+						transform: translateX(-90%);
+					}
+					to {
+						transform: translateX(90%);
+					}
+				}
+
 				.cut::after {
 					content: '\f015';
 					border: 1px solid white;
@@ -142,17 +168,6 @@
 					position: absolute;
 					box-shadow: 0.1em 0.1em 1em 0.5em var(--myLightColor);
 					text-align: center;
-
-					// &::before {
-					// 	content: '';
-					// 	position: absolute;
-					// 	top: 0;
-					// 	bottom: 0;
-					// 	left: 0;
-					// 	right: 0;
-					// 	background-color: rgba(5, 5, 19, 0.425);
-					// 	z-index: -1;
-					// }
 
 					h3 {
 						font-size: 1.2em;
