@@ -1,9 +1,9 @@
 import React from 'react';
 import './Form';
 
-const Form = ({ children, signup }) => {
+const Form = ({ children, signup, onSubmit, id, isSubmitting }) => {
   return (
-    <form className="form">
+    <form id={id} onSubmit={onSubmit} className={`form ${isSubmitting && ''}`}>
       <div className="formcenter">
         <h2>{signup ? 'Sign up' : 'Sign In'}</h2>
         {/* <div className="mobilebtn">

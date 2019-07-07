@@ -8,8 +8,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 let isDevelopment = false;
 
-if (['staging', 'review', 'production'].includes(process.env.NODE_ENV)) isDevelopment = false;
-else isDevelopment = true;
+if (['staging', 'review', 'production'].includes(process.env.NODE_ENV)) {
+  isDevelopment = false;
+} else isDevelopment = true;
 
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
@@ -23,7 +24,12 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            sourceMap: isDevelopment,
+          },
+        },
       },
       {
         test: /\.s(a|c)ss$/,

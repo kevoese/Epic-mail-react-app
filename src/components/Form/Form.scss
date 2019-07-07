@@ -9,6 +9,19 @@
 	overflow: hidden;
 	position: relative;
 
+	 
+	.invalid{
+		white-space: nowrap;
+		color: red;
+		font-size: 0.9em;
+		text-align: center;
+		position: absolute;
+		left: 50%;
+		margin: 0 auto;
+		padding: 0 1.5em;
+		transform: translateX(-50%);
+		transition: transform 0.5s ease-out;
+	}
 
 	.input {
 		display: block;
