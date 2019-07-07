@@ -4,7 +4,7 @@ import './Button';
 const Button = ({ classes, children, isSubmitting, onClick }) => {
   return (
     <button disabled={isSubmitting} onClick={onClick} className={`btn ${classes || ''}`}>
-      {children}
+      {isSubmitting ? 'Loading...' : children}
     </button>
   );
 };
