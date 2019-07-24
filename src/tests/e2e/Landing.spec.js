@@ -6,7 +6,7 @@ describe('Test Epic mail Landing Page', () => {
   it('should open sign up modal', () => {
     cy.visit('/');
     cy.get('button')
-      .contains('Joingfji')
+      .contains('Join now')
       .click();
     // cy.get('input[type=email]').type('patron.user@gmail.com');
     // cy.get('input[type=password]').type('password');

@@ -1,6 +1,12 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable no-tabs */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import Button from '@components/Button';
-import './Welcome';
+import './Welcome.scss';
 import axios from 'axios';
 
 class Welcome extends Component {
@@ -11,8 +17,8 @@ class Welcome extends Component {
     pictureFile: '',
     user: JSON.parse(localStorage.getItem('user')) || '',
     imgSrc: 'images/userprofile.png',
-  }; 
- 
+  };
+
   getImgLink = async () => {
     const imgForm = new FormData();
     imgForm.append('image', this.state.pictureFile);
@@ -30,7 +36,7 @@ class Welcome extends Component {
         { profilePic: response.data.data.link },
         {
           headers: { token: localStorage.getItem('token') },
-        }
+        },
       );
 
       const imgLink = profileResponse.data.data.profile_pic;
@@ -57,7 +63,7 @@ class Welcome extends Component {
   // 	const appLocal = 'http://localhost:3000/api/v2/';
   // 	console.log('here');
   // 	if (this.state.btnType === 'Go') {
-  // 		this.setState({isSubmitting: true});
+  // 	this.setState({isSubmitting: true});
   // 		try {
   // 			const profileResponse = await axios.put(
   // 				`${appLocal}user/update`,
@@ -85,13 +91,13 @@ class Welcome extends Component {
   // 	}
   // };
 
-  loadFilePath = async file => {
+  loadFilePath = async (file) => {
     const readPath = new FileReader();
     readPath.readAsDataURL(file);
     readPath.onload = e => this.setState({ imgSrc: e.target.result, btnType: 'Save' });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ isError: false });
     const [pictureFile] = event.target.files;
     this.setState({ pictureFile });
@@ -99,14 +105,17 @@ class Welcome extends Component {
   };
 
   render() {
-    const { isError, isSubmitting, btnType, imgSrc, user } = this.state;
+    const {
+      isError, isSubmitting, btnType, imgSrc, user,
+    } = this.state;
+    const { history } = this.props;
     return (
       <div className="welcome">
         <div className="wrapper">
           <Button
             classes="btn icon"
             isSubmitting={isSubmitting}
-            onClick={btnType === 'Save' ? this.getImgLink : () => this.props.history.push('/')}
+            onClick={btnType === 'Save' ? this.getImgLink : () => history.push('/inbox')}
           >
             {btnType}
           </Button>
@@ -125,10 +134,14 @@ class Welcome extends Component {
             accept="image/*"
             data-max-size="2000"
           />
-          <div className="loading hide"></div>
+          <div className="loading hide" />
           {isError && <p className="error icon">Problem uploading profile picture</p>}
           <p className="info">
-            Welcome to Epicmail {user.firstname} {user.lastname}
+            Welcome to Epicmail
+            {' '}
+            {user.firstname}
+            {' '}
+            {user.lastname}
           </p>
         </div>
       </div>

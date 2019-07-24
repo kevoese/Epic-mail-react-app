@@ -3,10 +3,22 @@
 exports[`Button component should render the button with loading when submitting is true 1`] = `
 <button
   className="btn "
-  disabled={false}
-  onClick={[MockFunction]}
+  disabled={true}
+  onClick={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
-  test
+  Loading...
 </button>
 `;
 

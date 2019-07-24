@@ -1,0 +1,45 @@
+@font-face {
+  font-family: myitalic;
+  src: url('../../fonts/Darleston.otf');
+}
+
+.navbar {
+  min-width: 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  border-bottom: 1px solid #c4c4c4;
+  padding: 0.5em 1.5em;
+  .mailLogo {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    img {
+      height: 1.4em;
+      width: 1.5em;
+    }
+    span {
+      font-family: myitalic;
+      color: rgb(0, 52, 156);
+      font-weight: 100;
+      font-size: 1.8em;
+      margin: 0 0.5em;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      cursor: pointer;
+     }
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    img {
+      height: 2.3em;
+      width: 2.3em;
+      border-radius: 100%;
+      border: 1px solid #c4c4c4;
+      margin: 0 1em;
+    }
+  }
+}
+
