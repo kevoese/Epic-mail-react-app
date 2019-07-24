@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 require('dotenv').config();
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
@@ -54,7 +55,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif|otf|ttf)$/,
+        test: /\.(png|jpe?g|gif|otf|ttf|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -69,6 +70,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'src'),
+    watchContentBase: true,
   },
   plugins: [
     new Dotenv(),

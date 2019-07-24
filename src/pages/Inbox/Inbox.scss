@@ -1,0 +1,84 @@
+.inbox {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+ .wrapper{
+   flex-grow: 1;
+   display: inline-flex;
+   .msgTabs {
+     width: 35%;
+     background-color: #f5f6f8;
+     border-right: 1px solid #c4c4c4;
+     display: flex;
+     flex-direction: column;
+     overflow: hidden;
+     .msgcontainer {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+      width: 300%;
+      transition: transform 0.4s ease-out;
+      .inboxDiv, .sentDiv, .draftDiv {
+        width: 100%;
+        background: url(../../images/empty.png) center no-repeat;
+        background-size: 30%;
+      }
+     }
+      
+     .showInbox {
+       transform: translateX(0);
+     }
+
+     .showSent {
+      transform: translateX(-33.3%);
+    }
+
+    .showDraft {
+      transform: translateX(-66.6%);
+    }
+     .groupLink{
+       height:5em;
+       background-color: #fcfcfa;
+       border-bottom: 1px solid #c4c4c4;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       span {
+          font-size: 1.2em;
+          color: #00349c;
+          font-weight: bold;
+          font-family: cambria;
+       }
+       div {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         border-radius: 100%;
+         box-shadow: 0px 1px 5px rgba(31, 30, 30, 0.5);
+         padding: 0.7em;
+         margin-left: 2em;
+         font-size: 1.4em;
+         color: #00349c;
+         border: 2px solid #00349c;
+         background-color: white;
+       }
+     }
+      .filters {
+        display: flex;
+        padding: 0 1em;
+        border-bottom: 1px solid #c4c4c4;
+        padding: 1em;
+      }
+      .tabs{
+        display: flex;
+      }
+    }
+    .msgContent {
+     width: 65%;
+     position: relative;
+     background: url(../../images/message.png) center no-repeat;
+     background-size: 30%;
+    }
+ }
+
+}

@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
-import './Landing';
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable no-mixed-spaces-and-tabs */
+import React, { Component, Fragment } from 'react';
+import './Landing.scss';
 import Footer from '@components/Footer';
 import Nav from '@components/Navbar';
 import Pagecontent from '@components/Pagecontent';
 import Button from '@components/Button';
 import Form from '@components/Form';
-import Input from '@components/Form/input';
+import Input from '@components/Form/Input';
 import Welcome from '@components/Welcome';
 import axios from 'axios';
 
@@ -50,19 +56,22 @@ class Landing extends Component {
   axiosCall = async (url, details) => {
     let result;
     try {
-      console.log('login state', this.state.isLogin);
       result = await axios.post(url, details);
       const data = result && result.data && result.data.data && result.data.data;
-      this.setState({
+
+      localStorage.setItem('token', data.Token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      this.resetForm();
+
+      await this.setState({
         token: data.Token,
         user: data.user,
         showWelcome: !this.state.isLogin,
       });
-      console.log('login state', data.user);
-      console.log('show the welcome', this.state.showWelcome);
-      localStorage.setItem('token', data.Token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      this.resetForm();
+
+      if (!this.state.showWelcome) {
+        this.props.history.push('/inbox');
+      }
     } catch ({ response }) {
       this.setState({
         isError: true,
@@ -73,13 +82,12 @@ class Landing extends Component {
     this.setState({
       isSubmitting: false,
     });
-    console.log('login state', this.state.user);
     return result;
   };
 
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    const isLogin = event.target.id === 'formLogin' ? true : false;
+    const isLogin = event.target.id === 'formLogin';
     const {
       firstname,
       lastname,
@@ -95,20 +103,19 @@ class Landing extends Component {
       isLogin,
     });
 
-    const app = 'https://epicmailappbykelvin.herokuapp.com/api/v2/';
-    const appLocal = 'http://localhost:3000/api/v2/';
+    // const app = 'https://epicmailappbykelvin.herokuapp.com/api/v2/';
+    const app = 'http://localhost:3000/api/v2/';
 
     const url = event.target.id === 'formLogin' ? `${app}auth/login` : `${app}auth/signup`;
-    const details =
-      event.target.id === 'formLogin'
-        ? { email: logEmail, password: logPassword }
-        : {
-            firstname,
-            lastname,
-            email: `${username}@epicmail.com`,
-            password,
-            alternativeEmail,
-          };
+    const details = event.target.id === 'formLogin'
+      ? { email: logEmail, password: logPassword }
+      : {
+        firstname,
+        lastname,
+        email: `${username}@epicmail.com`,
+        password,
+        alternativeEmail,
+      };
     await this.axiosCall(url, details);
   };
 
@@ -118,7 +125,7 @@ class Landing extends Component {
     });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
       formInfo: {
         ...this.state.formInfo,
@@ -161,13 +168,14 @@ class Landing extends Component {
       logEmail,
       logPassword,
     } = formInfo;
+    const { history } = this.props;
     return (
       <div className="bg-color landing-page">
         {showWelcome ? (
-          <Welcome />
+          <Welcome history={history} />
         ) : (
-          <>
-            <div className={`backgnd ${showForm ? 'blur-back' : ''}`}></div>
+          <Fragment>
+            <div className={`backgnd ${showForm ? 'blur-back' : ''}`} />
             <div className="container">
               {showForm || (
                 <Nav>
@@ -182,7 +190,7 @@ class Landing extends Component {
                     <div
                       onClick={() => this.setState({ showForm: false })}
                       className="cut icon"
-                    ></div>
+                    />
                     <Form onSubmit={this.handleSubmit} isSubmitting={isSubmitting} id="formLogin">
                       <Input
                         id="logEmail"
@@ -212,7 +220,7 @@ class Landing extends Component {
                       onSubmit={this.handleSubmit}
                       isSubmitting={isSubmitting}
                       id="formRegister"
-                      signup={true}
+                      signup
                     >
                       <Input
                         id="firstname"
@@ -274,9 +282,13 @@ class Landing extends Component {
 
                     <div className={`slider ${signupForm ? 'moveright' : 'moveleft'}`}>
                       <h2 className="welcome">Welcome to Epic mail</h2>
-                      <div className="bg-vector"></div>
+                      <div className="bg-vector" />
                       <div className="logHere">
-                        <h3> {!signupForm ? 'Not a member?' : 'Already a member'} </h3>
+                        <h3>
+                          {' '}
+                          {!signupForm ? 'Not a member?' : 'Already a member'}
+                          {' '}
+                        </h3>
                         <Button
                           isSubmitting={slideDelay || isSubmitting}
                           onClick={this.switchForms}
@@ -291,7 +303,7 @@ class Landing extends Component {
               </div>
               {showForm || <Footer />}
             </div>
-          </>
+          </Fragment>
         )}
       </div>
     );

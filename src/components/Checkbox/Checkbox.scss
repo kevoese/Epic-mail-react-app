@@ -1,0 +1,49 @@
+.checkbox {
+  height: 3em;
+  border: none;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  label {
+    width: 100%;
+    color: #2660d3;
+    font-size: 0.9em;
+    font-weight: lighter;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .checkIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 15%;
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 2px;
+  border: 2px solid #2660d3;
+  .checked {
+    display:none;
+  }
+}
+  }
+  input {
+    display: none;
+  }
+  input:checked + label {
+    color: #00349c;
+  }
+  input:checked + label .checked {
+    display: block;
+    color: white;
+    font-size: 0.7em;
+  }
+  input:checked + label .checkIcon {
+    background-color: #00349c;
+    border-color: #00349c;
+  }
+}
