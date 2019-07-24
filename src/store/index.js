@@ -1,13 +1,13 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import reducers from './reducers';
 
-// eslint-disable-next-line no-unused-vars
-const reducer = (state = {}, action) => {
-	return state;
-};
+const middlewares = applyMiddleware(thunk);
 
 const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  reducers,
+  composeWithDevTools(middlewares),
+);
 
 export default store;

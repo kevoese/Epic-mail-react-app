@@ -1,3 +1,24 @@
+:root {
+  --myTransColor: rgba(50, 50, 50, 0.5);
+  --myColor: #2660d3;
+  --myLightColor: #2660d385;
+}
+
+@font-face {
+  font-family: myfont;
+  src: url('../fonts/AlegreyaSans-Thin.otf');
+}
+
+@font-face {
+  font-family: mylogo;
+  src: url('../fonts/Amsterdam.ttf');
+}
+
+@font-face {
+  font-family: myitalic;
+  src: url('../fonts/Darleston.otf');
+}
+
 * {
   box-sizing: border-box;
 }

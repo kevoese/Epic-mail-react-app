@@ -1,0 +1,140 @@
+.welcomePage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fcfcfc;
+  .backgnd {
+    position: absolute;
+    z-index: 0;
+    top: -1em;
+    right: -2em;
+  }
+.welcome {
+  z-index: 2;
+  position: relative;
+  margin: auto;
+  width: 90%;
+  min-width: 300px;
+  max-width: 1000px;
+  .wrapper {
+    display: block;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+    padding: 3em;
+    color: rgba(36, 35, 35, 0.9);
+    position: relative;
+    box-shadow: 2px 2px 20px 1px #949393;
+    position: relative;
+
+    input {
+      display: none;
+    }
+
+    .error {
+      margin: 2em auto 0;
+      font-size: 18px;
+      color: red;
+    }
+
+    .addPhoto {
+      padding: 1.5em;
+      position: absolute;
+      bottom: -1em;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 1.1em;
+      font-family: cambria;
+      border-radius: 100%;
+      background-color: rgb(62, 47, 175);
+      border: 1px solid var(--myLightColor);
+      color: var(--myColor);
+      cursor: pointer;
+
+      &::after {
+        content: '\f030';
+        font-size: 1.2em;
+        color: white;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .info {
+      text-align: center;
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1.5em;
+      font-family: mylogo;
+      color: rgba(53, 38, 170, 0.7);
+      margin: 0 auto;
+    }
+
+    .name {
+      text-align: center;
+      font-weight: 100;
+      font-size: 3em;
+      margin: 0.4em;
+      color: rgba(76, 66, 126, 0.7);
+      padding-bottom: 0.4em;
+    }
+
+    .profilepic {
+      width: 16em;
+      height: 16em;
+      object-fit: cover;
+      border-radius: 100%;
+      box-shadow: 1px 1px 5px 2px rgba(4, 0, 66, 0.4);
+    }
+
+    .upload {
+      position: relative;
+      margin: 2em auto 4em;
+    }
+
+    .custombtn {
+      color: var(--myColor);
+      background-color: white;
+      padding: 0.9em 2em;
+      font-size: 1em;
+      position: absolute;
+      top: 2em;
+      cursor: pointer;
+      right: 1em;
+      border: 2px solid var(--myLightColor);
+      border-radius: 3em;
+
+      &:hover {
+        background-color: var(--myColor);
+        color: white;
+      }
+
+      &::after {
+        content: '\f054';
+        right: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8em;
+      }
+    }
+
+    .savebtn {
+      color: var(--myColor);
+      background-color: white;
+      padding: 0.9em 2em;
+      font-size: 1em;
+      cursor: pointer;
+      border: 2px solid var(--myLightColor);
+      border-radius: 3em;
+      margin: 0 auto;
+      &:hover {
+        background-color: var(--myColor);
+        color: white;
+      }
+    }
+  }
+}
+}

@@ -1,10 +1,10 @@
 import React from 'react';
-import './Checkbox';
+import './Checkbox.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Checkbox = ({ id, children, name }) => {
-  let checkIcon = <FontAwesomeIcon icon={faCheck} />;
+  const checkIcon = <FontAwesomeIcon icon={faCheck} />;
 
   return (
     <div className="checkbox">
