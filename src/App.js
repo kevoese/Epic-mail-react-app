@@ -1,30 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter, Route, Switch, withRouter,
-} from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Inbox from '@pages/Inbox';
-import Landing from '@pages/Landing';
+import Main from '@pages/Main';
 import store from './store';
 import './styles/App.scss';
 
-const App = () => (
-  <Fragment>
-    <Switch>
-      <Route exact path="/" component={Landing} />
-      <Route path="/inbox" component={Inbox} />
-    </Switch>
-  </Fragment>
-);
-
-const AppWithRouter = withRouter(App);
-
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <AppWithRouter />
-    </BrowserRouter>
+    <Router>
+      <Main />
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );

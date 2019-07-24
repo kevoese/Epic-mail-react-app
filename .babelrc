@@ -9,7 +9,10 @@
 					"@": "./",
 					"@components": "./src/components",
 					"@pages": "./src/pages",
-					"@images": "./src/images"
+					"@images": "./src/images",
+					"@utils": "./src/utils",
+					"@actions": "./src/store/actions",
+					"@reducers": "./src/store/reducers"
 				}
 			}
 		],

@@ -1,7 +1,9 @@
 .inbox {
-  min-height: 100vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
+  transform: translateY(8vh);
+  border-top: 1px solid #c4c4c4;
  .wrapper{
    flex-grow: 1;
    display: inline-flex;
@@ -47,7 +49,7 @@
           font-size: 1.2em;
           color: #00349c;
           font-weight: bold;
-          font-family: cambria;
+          font-family: cursive;
        }
        div {
          display: flex;

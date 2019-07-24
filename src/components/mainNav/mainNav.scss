@@ -3,14 +3,71 @@
   src: url('../../fonts/Darleston.otf');
 }
 
+@font-face {
+  font-family: mylogo;
+  src: url('../../fonts/Amsterdam.ttf');
+}
+
 .navbar {
+  z-index: 15;
   min-width: 100%;
   display:flex;
   justify-content: space-between;
+  position: fixed;
   align-items: center;
   margin: 0;
-  border-bottom: 1px solid #c4c4c4;
+  border: none;
   padding: 0.5em 1.5em;
+ a {
+   text-decoration: none;
+ }
+
+  .links{
+      position: absolute;
+      list-style: none;
+      right: 0.4em;
+      top: 6.2vh;
+      padding: 0;
+      font-family: serif;
+      box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+      li {
+        padding: 1em 2.5em 1em 2em;
+        font-family: cursive;
+        text-align: left;
+        color: #50505098;
+        border-bottom: 1px solid #dddddd7e;
+        background-color: white;
+        cursor: pointer;
+        &:hover {
+          background-color: #f0f0f0;
+          color: #474747;
+        }
+        span {
+         color: #5e5e5e;
+          font-weight: bold;
+        }
+      }
+
+      .userProfile {
+        padding-top: 2.2em;
+        padding-bottom: 2.2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f6f8;
+      }
+    
+    } 
+  
+  .dropDown {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hide{
+    transform: scale(0);
+    }
   .mailLogo {
     padding: 0;
     display: flex;
@@ -20,12 +77,11 @@
       width: 1.5em;
     }
     span {
-      font-family: myitalic;
-      color: rgb(0, 52, 156);
+      font-family: mylogo;
+      color: #012c81;
       font-weight: 100;
-      font-size: 1.8em;
-      margin: 0 0.5em;
-      letter-spacing: 0.05em;
+      font-size: 1em;
+      margin: 0 1em;
       white-space: nowrap;
       cursor: pointer;
      }
@@ -33,13 +89,30 @@
   .profile {
     display: flex;
     align-items: center;
-    img {
-      height: 2.3em;
-      width: 2.3em;
-      border-radius: 100%;
-      border: 1px solid #c4c4c4;
-      margin: 0 1em;
+    position: relative;
+    
+
+    .navInfo {
+      span {
+        margin: 0 1em;
+        color: white;
+        font-family: Source Code Pro;
+        font-size: 0.9em;
+        cursor: pointer;
+        padding-bottom: 0.5em;
+        &:hover {
+          border-bottom: 1px solid white;
+        }
+      }
     }
+  }
+
+  .profilePic {
+    height: 2.3em;
+    width: 2.3em;
+    border-radius: 100%;
+    border: 1px solid #c4c4c4;
+    margin: 0 1em 0 0;
   }
 }
 

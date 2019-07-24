@@ -9,7 +9,8 @@
     "start": "webpack-dev-server",
     "cypress": "cypress open",
     "dev": "webpack-dev-server",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "cypress": "cypress open"
   },
   "husky": {
     "hooks": {
@@ -17,7 +18,7 @@
     }
   },
   "lint-staged": {
-    "**/**/*.{js,json, css}": [
+    "**/**/*.{js,json, scss}": [
       "eslint --ext .json --ext .js --ext .scss --fix",
       "git add"
     ]
@@ -49,13 +50,9 @@
     "enzyme-to-json": "^3.3.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-config-prettier": "^5.0.0",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "eslint-plugin-class-property": "^1.1.0",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
@@ -87,10 +84,15 @@
     "axios": "^0.19.0",
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   }
 }
