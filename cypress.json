@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "env": {
+    "NODE_ENV": "test"
+  },
+  "integrationFolder": "./src/tests/e2e"
+}

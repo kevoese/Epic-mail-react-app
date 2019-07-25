@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1563966906111" clover="3.2.0">
+  <project timestamp="1563966906111" name="All files">
+    <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1" elements="7" coveredelements="6" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
+    <file name="index.js" path="/Users/kelvinesegbona/Documents/Software dev works/Epicmail/Epic-mail-react-app/src/components/Button/index.js">
+      <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="2" type="stmt"/>
+    </file>
+  </project>
+</coverage>

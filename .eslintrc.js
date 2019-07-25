@@ -25,6 +25,7 @@ module.exports = {
     'comma-dangle': 0,
     curly: ['error', 'multi-line'],
     'import/no-unresolved': 0,
+    'no-undef': 'off',
     'no-shadow': ['error', { allow: ['req', 'res', 'err'] }],
     'valid-jsdoc': [
       'error',

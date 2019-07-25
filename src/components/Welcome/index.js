@@ -33,7 +33,7 @@ class Welcome extends Component {
           headers: { token: localStorage.getItem('token') },
         }
       );
-      console.log('response from db', profileResponse.data);
+
       const imgLink = profileResponse.data.data.profile_pic;
       this.setState({
         user: {

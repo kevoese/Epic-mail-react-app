@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component should render the button with loading when submitting is true 1`] = `
+<button
+  className="btn "
+  disabled={false}
+  onClick={[MockFunction]}
+>
+  test
+</button>
+`;
+
+exports[`Button component should render the button without loading when submitting is false 1`] = `
+<button
+  className="btn "
+  disabled={false}
+  onClick={[MockFunction]}
+>
+  test
+</button>
+`;
