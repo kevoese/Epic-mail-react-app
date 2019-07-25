@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should render the Footer component 1`] = `
+<div
+  className="footer"
+>
+  <div>
+    <div
+      className="allhrs"
+    />
+     
+    <span>
+      HOURS SERVICES
+    </span>
+  </div>
+  <div>
+    <div
+      className="secure icon"
+    />
+    <span>
+      SECURE INFORMATION
+    </span>
+  </div>
+</div>
+`;

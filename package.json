@@ -1,5 +1,5 @@
 {
-  "name": "Epic-mail-react-app",
+  "name": "epic-mail-react-app",
   "version": "1.0.0",
   "description": "Epic mail app using react and sass css extension",
   "main": "index.js",
@@ -7,6 +7,7 @@
     "test": "jest --detectOpenHandles --verbose --coverage --forceExit",
     "build": "webpack",
     "start": "webpack-dev-server",
+    "dev": "webpack-dev-server",
     "cypress": "cypress open"
   },
   "husky": {
@@ -16,7 +17,7 @@
   },
   "lint-staged": {
     "**/**/*.{js,json, css}": [
-      "prettier **/**/*.{js,json} --write",
+      "eslint --ext .json --ext .js --ext .scss --fix",
       "git add"
     ]
   },
@@ -82,6 +83,8 @@
     "dotenv-webpack": "^1.7.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1"
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4"
   }
 }

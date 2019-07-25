@@ -2,8 +2,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import 'jsdom-global/register';
-import Form from '@components/Form';
-import Input from '@components/Form/input';
+// import Form from '@components/Form';
+import Input from '@components/Form/Input';
 
 describe('Form component', () => {
   it('should render the input component', () => {

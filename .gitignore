@@ -2,5 +2,8 @@ node_modules
 /node_modules
 .env
 dist
+package-lock.json
 .vscode
 .DS_store
+/coverage
+coverage

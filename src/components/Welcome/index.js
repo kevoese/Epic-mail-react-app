@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Button from '@components/Button';
-import { Link } from 'react-router-dom';
 import './Welcome';
 import axios from 'axios';
 
@@ -12,15 +11,15 @@ class Welcome extends Component {
     pictureFile: '',
     user: JSON.parse(localStorage.getItem('user')) || '',
     imgSrc: 'images/userprofile.png',
-  };
-
-  getImgLink = async event => {
+  }; 
+ 
+  getImgLink = async () => {
     const imgForm = new FormData();
     imgForm.append('image', this.state.pictureFile);
     imgForm.append('name', this.state.pictureFile.name);
     const imgurApiUrl = 'https://api.imgur.com/3/image';
     const app = 'https://epicmailappbykelvin.herokuapp.com/api/v2/';
-    const appLocal = 'http://localhost:3000/api/v2/';
+    // const appLocal = 'http://localhost:3000/api/v2/';
     this.setState({ isSubmitting: true });
     try {
       const response = await axios.post(imgurApiUrl, imgForm, {
@@ -93,7 +92,6 @@ class Welcome extends Component {
   };
 
   handleChange = event => {
-    console.log('history', this.props);
     this.setState({ isError: false });
     const [pictureFile] = event.target.files;
     this.setState({ pictureFile });

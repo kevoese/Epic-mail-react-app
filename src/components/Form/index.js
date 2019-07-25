@@ -1,5 +1,5 @@
 import React from 'react';
-import './Form';
+import './Form.scss';
 
 const Form = ({ children, signup, onSubmit, id, isSubmitting }) => {
   return (
