@@ -7,13 +7,15 @@ class Input extends Component {
     valid: false,
   };
 
-  validate = event => {
+  validate = (event) => {
     event.target.checkValidity() ? this.setState({ valid: true }) : this.setState({ valid: false });
     this.props.onChange(event);
   };
 
   render() {
-    const { id, value, type, pattern, placeholder, title, classes } = this.props;
+    const {
+      id, value, type, pattern, placeholder, title, classes, icon,
+    } = this.props;
     return (
       <div className={`icon linfo ${classes || ''} ${this.state.valid && 'validIcon'}`}>
         <input
@@ -27,6 +29,7 @@ class Input extends Component {
           required
           title={title}
         />
+        <div className="e-icon">{icon}</div>
       </div>
     );
   }

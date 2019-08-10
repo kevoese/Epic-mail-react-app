@@ -13,15 +13,12 @@
   top: 12vh;
   left: 50%;
   transform: translateX(-50%);
-  .cut {
-  &::after {
-    content: '\f00d';
+  .e-icon {
     color: white;
     right: 5%;
     cursor: pointer;
   }
 
-}
   span {
     font-family: Source Code Pro;
     color: white;

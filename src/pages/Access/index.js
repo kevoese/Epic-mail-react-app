@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser, faEnvelope, faLock,
+} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import './Access.scss';
 import Button from '@components/Button';
@@ -135,6 +139,10 @@ class Access extends Component {
 
 
   render() {
+    const userIcon = <FontAwesomeIcon icon={faUser} />;
+    const emailIcon = <FontAwesomeIcon icon={faEnvelope} />;
+    const passwordIcon = <FontAwesomeIcon icon={faLock} />;
+
     const {
       slideDelay,
       signupForm,
@@ -167,6 +175,7 @@ class Access extends Component {
             <Input
               id="logEmail"
               value={logEmail}
+              icon={userIcon}
               onChange={this.handleChange}
               type="text"
               pattern="^\w+@epicmail.com$"
@@ -177,13 +186,14 @@ class Access extends Component {
             <Input
               id="logPassword"
               onChange={this.handleChange}
+              icon={passwordIcon}
               value={logPassword}
               classes="passwrd"
               type="password"
               placeholder="Password"
               required
             />
-            <Button isSubmitting={isLoading} classes="">
+            <Button isSubmitting={isLoading} type="submit" classes="">
               LOGIN
             </Button>
           </Form>
@@ -197,6 +207,7 @@ class Access extends Component {
               id="firstname"
               value={firstname}
               onChange={this.handleChange}
+              icon={userIcon}
               type="text"
               pattern="^[\w]{3,20}$"
               placeholder="Enter First name"
@@ -206,6 +217,7 @@ class Access extends Component {
             <Input
               id="lastname"
               value={lastname}
+              icon={userIcon}
               onChange={this.handleChange}
               type="text"
               pattern="^[\w]{3,20}$"
@@ -216,6 +228,7 @@ class Access extends Component {
             <Input
               id="username"
               value={username}
+              icon={userIcon}
               onChange={this.handleChange}
               pattern="^[\w@]{3,20}$"
               type="text"
@@ -226,6 +239,7 @@ class Access extends Component {
             <Input
               id="alternativeEmail"
               value={alternativeEmail}
+              icon={emailIcon}
               onChange={this.handleChange}
               type="text"
               pattern="^\w+@[\w]{2,20}.[a-z]{2,5}$"
@@ -236,6 +250,7 @@ class Access extends Component {
             <Input
               id="password"
               value={password}
+              icon={passwordIcon}
               onChange={this.handleChange}
               classes="passwrd"
               pattern="^[\w@.]{7,20}$"
@@ -243,7 +258,7 @@ class Access extends Component {
               placeholder="Password"
               required
             />
-            <Button isSubmitting={isLoading} classes="">
+            <Button isSubmitting={isLoading} type="submit" classes="">
               SIGN UP NOW
             </Button>
           </Form>
@@ -253,7 +268,7 @@ class Access extends Component {
             <div className="bg-vector" />
             <div className="logHere">
               <h3>
-                {!signupForm ? 'Not a member?' : 'Already a member'}
+                {!signupForm ? 'Not a member?' : 'Already a member?'}
               </h3>
               <Button
                 isSubmitting={slideDelay || isLoading}

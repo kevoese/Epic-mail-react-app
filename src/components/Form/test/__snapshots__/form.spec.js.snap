@@ -14,5 +14,8 @@ exports[`Form component should render the input component 1`] = `
     type="password"
     value=""
   />
+  <div
+    className="e-icon"
+  />
 </div>
 `;

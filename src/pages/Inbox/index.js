@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 // import Input from '@components/Form/input';
 import './Inbox.scss';
-// import axios from 'axios';
 
 class Inbox extends Component {
 state = {
