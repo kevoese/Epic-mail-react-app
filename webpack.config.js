@@ -15,7 +15,7 @@ if (['staging', 'review', 'production'].includes(process.env.NODE_ENV)) {
 
 module.exports = {
   mode: isDevelopment ? 'development' : 'production',
-  entry: path.join(__dirname, 'src', 'app.js'),
+  entry: path.join(__dirname, 'src', 'App.js'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.bundle.js',
