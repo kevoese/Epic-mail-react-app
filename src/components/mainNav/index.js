@@ -89,7 +89,6 @@ class mainNav extends Component {
             <span>
               {firstname}
               {' '}
-              {' '}
               {lastname}
             </span>
 

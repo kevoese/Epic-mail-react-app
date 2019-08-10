@@ -47,7 +47,7 @@
        align-items: center;
        span {
           font-size: 1.2em;
-          color: #00349c;
+          color: var(--myColor);
           font-weight: bold;
           font-family: cursive;
        }
@@ -60,8 +60,8 @@
          padding: 0.7em;
          margin-left: 2em;
          font-size: 1.4em;
-         color: #00349c;
-         border: 2px solid #00349c;
+         color: var(--myColor);
+         border: 2px solid var(--myColor);
          background-color: white;
        }
      }

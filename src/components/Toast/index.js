@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Toast.scss';
 import { noToast } from '@actions/Toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 
 class Toast extends Component {
   state = {
@@ -21,7 +25,9 @@ class Toast extends Component {
       show
         ? (
           <div className={`toast ${custom}`}>
-            <div className="cut icon" onClick={this.handleClick} />
+            <div className="e-icon" onClick={this.handleClick}>
+              <FontAwesomeIcon icon={faTimes} />
+            </div>
             <span>{message}</span>
           </div>
         )

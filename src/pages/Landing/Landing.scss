@@ -6,7 +6,6 @@
     opacity: 1;
   }
 }
-
 .bg-color {
   background-color: #fcfcfc;
 }
@@ -76,25 +75,20 @@
           transition: all linear 0.3s;
           font-size: 1em;
       
-        &:hover {
-          color: rgba(255, 255, 255, 0.897);
-          background-color: var(--myColor);
+          &:hover {
+            color: rgba(255, 255, 255, 0.897);
+            background-color: var(--myColor);
+            .e-icon {
+                right: 10%;
+            }
+          }
+          
+          .e-icon {
+            right: 20%;
+            transition: right linear 0.3s;
+          
+          }
         }
-        
-        &::after {
-          content: '\f054';
-          display: inline-block;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 20%;
-          position: absolute;
-          transition: right linear 0.3s;
-        }
-        
-        &:hover::after {
-          right: 10%;
-        }
-      }
       }
        
     }

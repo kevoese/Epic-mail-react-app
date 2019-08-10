@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   token: localStorage.token || null,
   user: (localStorage.user && localStorage.user !== 'undefined' && JSON.parse(localStorage.user)) || null,
-  isLoggedIn: false,
+  isLoggedIn: localStorage.token || false,
 };
 
 const authReducer = (state = INITIAL_STATE, { type, payload }) => {
