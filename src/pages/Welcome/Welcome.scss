@@ -39,22 +39,20 @@
     }
 
     .addPhoto {
-      padding: 1.5em;
+      padding: 1.3em;
       position: absolute;
       bottom: -1em;
       left: 50%;
       transform: translateX(-50%);
-      white-space: nowrap;
-      font-size: 1.1em;
+      font-size: 0.9em;
       font-family: cambria;
       border-radius: 100%;
-      background-color: rgb(62, 47, 175);
-      border: 1px solid var(--myLightColor);
+      background-color: var(--myColor);;
+      border: 5px solid white;
       color: var(--myColor);
       cursor: pointer;
 
-      &::after {
-        content: '\f030';
+      div {
         font-size: 1.2em;
         color: white;
         left: 50%;
@@ -69,7 +67,8 @@
       padding: 0.5em;
       font-size: 1.5em;
       font-family: mylogo;
-      color: rgba(53, 38, 170, 0.7);
+      text-transform: capitalize;
+      color: #2660d3;
       margin: 0 auto;
     }
 
@@ -78,7 +77,7 @@
       font-weight: 100;
       font-size: 3em;
       margin: 0.4em;
-      color: rgba(76, 66, 126, 0.7);
+      color: var(--myLightColor);
       padding-bottom: 0.4em;
     }
 
@@ -112,8 +111,7 @@
         color: white;
       }
 
-      &::after {
-        content: '\f054';
+      div {
         right: 1em;
         top: 50%;
         transform: translateY(-50%);

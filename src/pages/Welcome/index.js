@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faCamera } from '@fortawesome/free-solid-svg-icons';
 import Button from '@components/Button';
 import './Welcome.scss';
 import { toastAction } from '@actions/Toast';
@@ -52,6 +54,8 @@ class Welcome extends Component {
 
 
   render() {
+    const arrowIcon = <FontAwesomeIcon icon={faChevronRight} />;
+    const uploadIcon = <FontAwesomeIcon icon={faCamera} />;
     const {
       imgSrc, showSave,
     } = this.state;
@@ -67,7 +71,7 @@ class Welcome extends Component {
       <div className="welcomePage">
         <div className="backgnd">
           <svg width="500" height="291" viewBox="0 0 545 291" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M539.64 6.59729C539.64 58.5524 556.587 333.916 530.211 285.264C352.924 10.9313 77.5 157 0 0C122.102 0 148.947 0.000205648 288.493 0.000205648C428.039 0.000205648 519.165 5.8651e-05 539.64 6.59729Z" fill="#3526AA" fillOpacity="0.75" />
+            <path d="M539.64 6.59729C539.64 58.5524 556.587 333.916 530.211 285.264C352.924 10.9313 77.5 157 0 0C122.102 0 148.947 0.000205648 288.493 0.000205648C428.039 0.000205648 519.165 5.8651e-05 539.64 6.59729Z" fill="#2660d3" fillOpacity="0.75" />
           </svg>
         </div>
         <div className="welcome">
@@ -85,10 +89,13 @@ class Welcome extends Component {
               onClick={() => history.push('/inbox')}
             >
               {isCompleted ? 'Go' : 'Skip'}
+              <div className="e-icon">{arrowIcon}</div>
             </Button>
             <div className="upload">
               <img src={imgSrc} alt="profilePic" className="profilepic" />
-              <label htmlFor="welcomeUpload" className="addPhoto icon" />
+              <label htmlFor="welcomeUpload" className="addPhoto icon">
+                <div className="e-icon">{uploadIcon}</div>
+              </label>
               <input
                 id="welcomeUpload"
                 type="file"

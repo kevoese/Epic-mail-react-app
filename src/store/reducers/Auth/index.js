@@ -1,24 +1,17 @@
 const INITIAL_STATE = {
-  token: localStorage.token || null,
-  user: (localStorage.user && localStorage.user !== 'undefined' && JSON.parse(localStorage.user)) || null,
-  isLoggedIn: localStorage.token || false,
+  token: null,
+  user: {},
+  isLoggedIn: false,
+  isStarting: true,
 };
 
 const authReducer = (state = INITIAL_STATE, { type, payload }) => {
-  switch (type) {
-    case 'SAVE_USER':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'REMOVE_USER':
-      return {
-        ...state,
-        ...payload,
-      };
-    default:
-      return state;
-  }
+  if (['REMOVE_USER', 'SET_USER'].includes(type)) {
+    return {
+      ...state,
+      ...payload,
+    };
+  } return state;
 };
 
 export default authReducer;

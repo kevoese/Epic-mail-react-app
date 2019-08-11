@@ -1,5 +1,5 @@
 import { axiosCall } from '@utils/axiosConfig';
-import { saveUser } from '@actions/Auth';
+import { saveUser, setUser } from '@actions/Auth';
 
 export const startRegister = () => ({
   type: 'SIGNUP_START',
@@ -26,7 +26,7 @@ export const registerFailure = error => ({
   type: 'SIGNUP_ERROR',
   payload: {
     isLoading: false,
-    isCompleted: false,
+    isCompleted: true,
     isSuccess: false,
     isError: true,
     message: error,
@@ -40,7 +40,7 @@ export const registerSuccess = () => ({
     isCompleted: true,
     isSuccess: true,
     isError: false,
-    message: 'Regisration Successful',
+    message: 'Registration Successful',
   },
 });
 
@@ -51,8 +51,10 @@ export const registerAction = {
       const res = await axiosCall({ path: 'auth/signup', method: 'post', payload: signUpData });
       const userData = res && res.data;
       await dispatch(registerSuccess());
-      dispatch(saveUser(userData));
+      saveUser(userData);
+      dispatch(setUser({ user: userData.user, token: userData.Token }));
     } catch ({ response, message }) {
+      /* istanbul ignore next */
       if (response) {
         await dispatch(registerFailure(response.data.error));
         return;

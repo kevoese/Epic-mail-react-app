@@ -1,5 +1,6 @@
-import { axiosCall, axios } from '@utils/axiosConfig';
-import { saveUser } from '@actions/Auth';
+import { axiosCall } from '@utils/axiosConfig';
+import { saveUser, setUser } from '@actions/Auth';
+import { getImgLink } from '@utils';
 
 export const startUpdate = () => ({
   type: 'UPDATE_START',
@@ -31,19 +32,6 @@ export const updateFailure = error => ({
   },
 });
 
-export const getImgLink = async (pictureFile) => {
-  const imgForm = new FormData();
-  imgForm.append('image', pictureFile);
-  imgForm.append('name', pictureFile.name);
-  const imgurApiUrl = 'https://api.imgur.com/3/image';
-  const response = await axios.post(imgurApiUrl, imgForm, {
-    headers: { Authorization: 'Client-ID 163ceaad1d6ed26' },
-  });
-
-  const imgLink = response && response.data && response.data.data && response.data.data.link;
-  return imgLink;
-};
-
 
 export const updateAction = {
   updateUser: payload => async (dispatch) => {
@@ -58,12 +46,16 @@ export const updateAction = {
         res = await axiosCall({ path: 'user/update', method: 'put', payload });
       }
       const userData = res && res.data;
-      await dispatch(saveUser(userData));
+      await dispatch(updateSuccess());
+      saveUser({ user: userData });
+      await dispatch(setUser({ user: userData }));
     } catch ({ response, message }) {
+      /* istanbul ignore next */
       if (response) {
         await dispatch(updateFailure(response.data.error));
         return;
       }
+      /* istanbul ignore next */
       await dispatch(updateFailure(message));
     }
   },
