@@ -1,5 +1,5 @@
 import { axiosCall } from '@utils/axiosConfig';
-import { saveUser } from '@actions/Auth';
+import { saveUser, setUser } from '@actions/Auth';
 
 export const startLogin = () => ({
   type: 'SIGNIN_START',
@@ -42,7 +42,7 @@ export const loginSuccess = () => ({
     isCompleted: true,
     isSuccess: true,
     isError: false,
-    message: 'Login successful',
+    message: 'Login Successful',
   },
 });
 
@@ -53,8 +53,10 @@ export const loginAction = {
       const res = await axiosCall({ path: 'auth/login', method: 'post', payload: signUpData });
       const userData = res && res.data;
       dispatch(loginSuccess());
-      dispatch(saveUser(userData));
+      saveUser(userData);
+      dispatch(setUser({ user: userData.user, token: userData.Token }));
     } catch ({ response, message }) {
+      /* istanbul ignore next */
       if (response) {
         dispatch(loginFailure(response.data.error));
         return;

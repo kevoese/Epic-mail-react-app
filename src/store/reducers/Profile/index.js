@@ -7,25 +7,12 @@ const INITIAL_STATE = {
 };
 
 const profileReducer = (state = INITIAL_STATE, { type, payload }) => {
-  switch (type) {
-    case 'UPDATE_START':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'UPDATE_SUCCESS':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'UPDATE_FAILURE':
-      return {
-        ...state,
-        ...payload,
-      };
-    default:
-      return state;
-  }
+  if (['UPDATE_START', 'UPDATE_SUCCESS', 'UPDATE_FAILURE', 'CLEAN_UP'].includes(type)) {
+    return {
+      ...state,
+      ...payload,
+    };
+  } return state;
 };
 
 export default profileReducer;

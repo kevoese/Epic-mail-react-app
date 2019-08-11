@@ -1,5 +1,6 @@
 import axiosDefault from 'axios';
 
+/* istanbul ignore next */
 export const axiosCall = async ({
   path, payload, method,
 }) => {

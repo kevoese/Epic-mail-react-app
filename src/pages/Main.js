@@ -6,6 +6,7 @@ import Toast from '@components/Toast';
 import Access from '@pages/Access';
 import Nav from '@components/mainNav';
 import Landing from '@pages/Landing';
+import withUser from '@components/HOC/withUser';
 
 const Main = ({ history }) => (
   <div>
@@ -20,4 +21,4 @@ const Main = ({ history }) => (
   </div>
 );
 
-export default withRouter(Main);
+export default withUser(withRouter(Main));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Tab from '@components/Tab';
 import Checkbox from '@components/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,8 +11,7 @@ import './Inbox.scss';
 
 class Inbox extends Component {
 state = {
-  token: localStorage.token || null,
-  user: localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')),
+  user: this.props.user,
   switchState: 'showInbox',
 };
 
@@ -89,4 +89,8 @@ state = {
   }
 }
 
-export default Inbox;
+const mapStateToProps = ({ authReducer }) => ({
+  user: authReducer.user,
+});
+
+export default connect(mapStateToProps)(Inbox);

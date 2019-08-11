@@ -5,20 +5,12 @@ const INITIAL_STATE = {
 };
 
 const toastReducer = (state = INITIAL_STATE, { type, payload }) => {
-  switch (type) {
-    case 'SHOW':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'NONE':
-      return {
-        ...state,
-        ...payload,
-      };
-    default:
-      return state;
-  }
+  if (['SHOW', 'NONE'].includes(type)) {
+    return {
+      ...state,
+      ...payload,
+    };
+  } return state;
 };
 
 export default toastReducer;

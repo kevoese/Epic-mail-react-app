@@ -7,30 +7,12 @@ const INITIAL_STATE = {
 };
 
 const signUpReducer = (state = INITIAL_STATE, { type, payload }) => {
-  switch (type) {
-    case 'SIGNUP_START':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'SIGNUP_SUCCESS':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'SIGNUP_ERROR':
-      return {
-        ...state,
-        ...payload,
-      };
-    case 'CLEAN_UP':
-      return {
-        ...state,
-        ...payload,
-      };
-    default:
-      return state;
-  }
+  if (['SIGNUP_START', 'SIGNUP_SUCCESS', 'SIGNUP_ERROR', 'CLEAN_UP'].includes(type)) {
+    return {
+      ...state,
+      ...payload,
+    };
+  } return state;
 };
 
 export default signUpReducer;
