@@ -1,27 +1,38 @@
-
+/* eslint-disable no-nested-ternary */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tab from '@components/Tab';
 import Checkbox from '@components/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faInbox, faEdit, faPaperPlane, faUsers,
+  faInbox,
+  faEdit,
+  faPaperPlane,
+  faUsers,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 import { getInboxAction } from '@actions/Inbox';
 import MessageBox from '@components/MessageBox';
 import './Inbox.scss';
+import { getdraftAction } from '@actions/Draft';
+import { getsentAction } from '@actions/Sent';
+
+const inboxIcon = <FontAwesomeIcon icon={faInbox} />;
+const sentIcon = <FontAwesomeIcon icon={faPaperPlane} />;
+const draftIcon = <FontAwesomeIcon icon={faEdit} />;
+const spinnerIcon = <FontAwesomeIcon icon={faSpinner} spin />;
 
 class Inbox extends Component {
-state = {
-  user: this.props.user,
-  switchState: 'showInbox',
-  messageList: [],
-};
+  state = {
+    user: this.props.user,
+    switchState: 'showInbox',
+  };
 
-componentDidMount() {
-  this.props.getInbox();
-}
-
+  componentDidMount() {
+    this.props.getInbox();
+    this.props.getSent();
+    this.props.getDraft();
+  }
 
   handleSwitch = (event) => {
     const { id } = event.target;
@@ -48,11 +59,41 @@ componentDidMount() {
 
   render() {
     const { switchState } = this.state;
-    const { messages } = this.props;
-    const inboxIcon = <FontAwesomeIcon icon={faInbox} />;
-    const sentIcon = <FontAwesomeIcon icon={faPaperPlane} />;
-    const draftIcon = <FontAwesomeIcon icon={faEdit} />;
-    const messageList = messages.length >= 1 ? messages.map(msg => <MessageBox key={msg.message_id} messageObj={msg} />) : 'empty';
+    const {
+      messages,
+      sentMessages,
+      draftMessages,
+      sentLoading,
+      inboxLoading,
+      draftLoading,
+    } = this.props;
+    const messageList = messages && messages.length >= 1 ? (
+      messages.map(msg => (
+        <MessageBox key={msg.message_id} messageObj={msg} />
+      ))
+    ) : inboxLoading ? (
+      <div className="spin">{spinnerIcon}</div>
+    ) : (
+      <p className="empty">No Inbox message</p>
+    );
+    const sentList = sentMessages && sentMessages.length >= 1 ? (
+      sentMessages.map(msg => (
+        <MessageBox key={msg.message_id} messageObj={msg} />
+      ))
+    ) : sentLoading ? (
+      <div className="spin">{spinnerIcon}</div>
+    ) : (
+      <p className="empty">No sent message</p>
+    );
+    const draftList = draftMessages && draftMessages.length >= 1 ? (
+      draftMessages.map(msg => (
+        <MessageBox key={msg.message_id} messageObj={msg} />
+      ))
+    ) : draftLoading ? (
+      <div className="spin">{spinnerIcon}</div>
+    ) : (
+      <p className="empty">No draft message</p>
+    );
 
     return (
       <div className="inbox">
@@ -65,13 +106,28 @@ componentDidMount() {
               </div>
             </div>
             <div className="tabs">
-              <Tab id="inbox" name="inboxTabs" handleSwitch={this.handleSwitch} icon={inboxIcon}>
+              <Tab
+                id="inbox"
+                name="inboxTabs"
+                handleSwitch={this.handleSwitch}
+                icon={inboxIcon}
+              >
                 Inbox
               </Tab>
-              <Tab id="sent" name="inboxTabs" handleSwitch={this.handleSwitch} icon={sentIcon}>
+              <Tab
+                id="sent"
+                name="inboxTabs"
+                handleSwitch={this.handleSwitch}
+                icon={sentIcon}
+              >
                 Sent
               </Tab>
-              <Tab id="draft" name="inboxTabs" handleSwitch={this.handleSwitch} icon={draftIcon}>
+              <Tab
+                id="draft"
+                name="inboxTabs"
+                handleSwitch={this.handleSwitch}
+                icon={draftIcon}
+              >
                 Draft
               </Tab>
             </div>
@@ -87,11 +143,9 @@ componentDidMount() {
               </Checkbox>
             </div>
             <div className={`msgcontainer ${switchState}`}>
-              <div className="inboxDiv">
-                {messageList}
-              </div>
-              <div className="sentDiv">sent</div>
-              <div className="draftDiv">draft</div>
+              <div className="inboxDiv">{messageList}</div>
+              <div className="sentDiv">{sentList}</div>
+              <div className="draftDiv">{draftList}</div>
             </div>
           </div>
           <div className="msgContent" />
@@ -101,8 +155,19 @@ componentDidMount() {
   }
 }
 
-const mapStateToProps = ({ inboxReducer }) => ({
+const mapStateToProps = ({ inboxReducer, sentReducer, draftReducer }) => ({
   messages: inboxReducer.messages,
+  inboxLoading: inboxReducer.isLoading,
+  sentMessages: sentReducer.messages,
+  sentLoading: sentReducer.isLoading,
+  draftMessages: draftReducer.messages,
+  draftLoading: draftReducer.isLoading,
 });
 
-export default connect(mapStateToProps, { getInbox: getInboxAction })(Inbox);
+const mapDispatchToProps = {
+  getInbox: getInboxAction,
+  getDraft: getdraftAction,
+  getSent: getsentAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Inbox);

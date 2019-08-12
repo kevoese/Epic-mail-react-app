@@ -4,6 +4,31 @@
   flex-direction: column;
   transform: translateY(8vh);
   border-top: 1px solid #c4c4c4;
+
+  .spin {
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    font-family: cursive;
+    font-weight: 700;
+    left: 50%;
+    margin: auto;
+   transform: translate(-50%, -50%);
+   color: rgb(80, 80, 80);
+  }
+ 
+  .empty {
+    position: absolute;
+    top: 50%;
+    color: rgb(80, 80, 80);
+    font-family: cursive;
+    font-size: 1.5em;
+    font-weight: 700;
+    left: 50%;
+    margin: auto;
+   transform: translate(-50%, -50%);
+  }
+
  .wrapper{
    flex-grow: 1;
    display: inline-flex;
@@ -22,6 +47,9 @@
       transition: transform 0.4s ease-out;
       .inboxDiv, .sentDiv, .draftDiv {
         width: 100%;
+        position: relative;
+      }
+      .divEmpty {
         background: url(../../images/empty.png) center no-repeat;
         background-size: 30%;
       }
