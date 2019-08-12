@@ -5,6 +5,8 @@ import toastReducer from '@reducers/Toast';
 import authReducer from '@reducers/Auth';
 import profileReducer from '@reducers/Profile';
 import inboxReducer from '@reducers/Inbox';
+import sentReducer from '@reducers/Sent';
+import draftReducer from '@reducers/Draft';
 
 const reducers = combineReducers({
   signUpReducer,
@@ -13,6 +15,8 @@ const reducers = combineReducers({
   authReducer,
   profileReducer,
   inboxReducer,
+  sentReducer,
+  draftReducer,
 });
 
 export default reducers;

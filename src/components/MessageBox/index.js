@@ -22,7 +22,7 @@ const messagepanel = ({ messageObj }) => {
 
   return (
     <div id={`${message_id}_small`} className={`messageBox ${status}msg`}>
-      <div className="icon msgStatus">{ status === 'read' ? readIcon : unreadIcon }</div>
+      { status ? <div className="icon msgStatus">{ status === 'read' ? readIcon : unreadIcon }</div> : ''}
       <div className="username">
         <span className="icon">{userIcon}</span>
         <p>{`${firstname} ${lastname}`}</p>
