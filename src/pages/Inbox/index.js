@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tab from '@components/Tab';
@@ -6,14 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faInbox, faEdit, faPaperPlane, faUsers,
 } from '@fortawesome/free-solid-svg-icons';
-// import Input from '@components/Form/input';
+import { getInboxAction } from '@actions/Inbox';
+import MessageBox from '@components/MessageBox';
 import './Inbox.scss';
 
 class Inbox extends Component {
 state = {
   user: this.props.user,
   switchState: 'showInbox',
+  messageList: [],
 };
+
+componentDidMount() {
+  this.props.getInbox();
+}
+
 
   handleSwitch = (event) => {
     const { id } = event.target;
@@ -40,9 +48,11 @@ state = {
 
   render() {
     const { switchState } = this.state;
+    const { messages } = this.props;
     const inboxIcon = <FontAwesomeIcon icon={faInbox} />;
     const sentIcon = <FontAwesomeIcon icon={faPaperPlane} />;
     const draftIcon = <FontAwesomeIcon icon={faEdit} />;
+    const messageList = messages.length >= 1 ? messages.map(msg => <MessageBox key={msg.message_id} messageObj={msg} />) : 'empty';
 
     return (
       <div className="inbox">
@@ -77,7 +87,9 @@ state = {
               </Checkbox>
             </div>
             <div className={`msgcontainer ${switchState}`}>
-              <div className="inboxDiv">inbox</div>
+              <div className="inboxDiv">
+                {messageList}
+              </div>
               <div className="sentDiv">sent</div>
               <div className="draftDiv">draft</div>
             </div>
@@ -89,8 +101,8 @@ state = {
   }
 }
 
-const mapStateToProps = ({ authReducer }) => ({
-  user: authReducer.user,
+const mapStateToProps = ({ inboxReducer }) => ({
+  messages: inboxReducer.messages,
 });
 
-export default connect(mapStateToProps)(Inbox);
+export default connect(mapStateToProps, { getInbox: getInboxAction })(Inbox);
