@@ -50,7 +50,7 @@ export const loginAction = {
   loginUser: signUpData => async (dispatch) => {
     dispatch(startLogin());
     try {
-      const res = await axiosCall({ path: 'auth/login', method: 'post', payload: signUpData });
+      const res = await axiosCall({ path: 'auth/login', method: 'POST', payload: signUpData });
       const userData = res && res.data;
       dispatch(loginSuccess());
       saveUser(userData);

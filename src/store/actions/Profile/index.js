@@ -43,7 +43,7 @@ export const updateAction = {
         const updateData = { ...payload, profilePic: imgLink };
         res = await axiosCall({ path: 'user/update', method: 'put', payload: updateData });
       } else {
-        res = await axiosCall({ path: 'user/update', method: 'put', payload });
+        res = await axiosCall({ path: 'user/update', method: 'PUT', payload });
       }
       const userData = res && res.data;
       await dispatch(updateSuccess());

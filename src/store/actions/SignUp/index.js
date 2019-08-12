@@ -48,7 +48,7 @@ export const registerAction = {
   registerUser: signUpData => async (dispatch) => {
     dispatch(startRegister());
     try {
-      const res = await axiosCall({ path: 'auth/signup', method: 'post', payload: signUpData });
+      const res = await axiosCall({ path: 'auth/signup', method: 'POST', payload: signUpData });
       const userData = res && res.data;
       await dispatch(registerSuccess());
       saveUser(userData);
