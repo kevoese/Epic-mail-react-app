@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   isCompleted: false,
   isError: false,
   error: null,
+  type: 'all',
   messages: [],
 };
 

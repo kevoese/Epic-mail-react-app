@@ -8,14 +8,14 @@ export const inboxPending = () => ({
   },
 });
 
-export const inboxSuccess = messages => ({
+export const inboxSuccess = data => ({
   type: 'INBOX_SUCCESS',
   payload: {
     isLoading: false,
     isError: false,
     isCompleted: true,
     errror: null,
-    messages,
+    ...data,
   },
 });
 
@@ -31,13 +31,23 @@ export const inboxFailure = error => ({
 });
 
 
-export const getInboxAction = () => async (dispatch) => {
+export const getInboxAction = ({ type }) => async (dispatch) => {
   try {
     await dispatch(inboxPending());
-    const res = await axiosCall({ path: 'messages', method: 'get' });
+    let res;
+    switch (type) {
+      case 'read':
+        res = await axiosCall({ path: 'messages/read', method: 'get' });
+        break;
+      case 'unread':
+        res = await axiosCall({ path: 'messages/unread', method: 'get' });
+        break;
+      default:
+        res = await axiosCall({ path: 'messages', method: 'get' });
+        break;
+    }
     const messages = res && res.data;
-
-    dispatch(inboxSuccess(messages));
+    dispatch(inboxSuccess({ messages, type }));
   } catch ({ response, message }) {
     /* istanbul ignore next */
     if (response) {

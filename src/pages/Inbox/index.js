@@ -29,7 +29,7 @@ class Inbox extends Component {
   };
 
   componentDidMount() {
-    this.props.getInbox();
+    this.props.getInbox({ type: 'all' });
     this.props.getSent();
     this.props.getDraft();
   }
@@ -57,6 +57,13 @@ class Inbox extends Component {
     }
   };
 
+  handleFilter = (event) => {
+    const { id } = event.target;
+    if (this.props.inboxType !== id) {
+      this.props.getInbox({ type: id });
+    }
+  }
+
   render() {
     const { switchState } = this.state;
     const {
@@ -67,12 +74,13 @@ class Inbox extends Component {
       inboxLoading,
       draftLoading,
     } = this.props;
+
+    const loader = <div className="spin">{spinnerIcon}</div>;
+
     const messageList = messages && messages.length >= 1 ? (
       messages.map(msg => (
         <MessageBox key={msg.message_id} messageObj={msg} />
       ))
-    ) : inboxLoading ? (
-      <div className="spin">{spinnerIcon}</div>
     ) : (
       <p className="empty">No Inbox message</p>
     );
@@ -80,8 +88,6 @@ class Inbox extends Component {
       sentMessages.map(msg => (
         <MessageBox key={msg.message_id} messageObj={msg} />
       ))
-    ) : sentLoading ? (
-      <div className="spin">{spinnerIcon}</div>
     ) : (
       <p className="empty">No sent message</p>
     );
@@ -89,8 +95,6 @@ class Inbox extends Component {
       draftMessages.map(msg => (
         <MessageBox key={msg.message_id} messageObj={msg} />
       ))
-    ) : draftLoading ? (
-      <div className="spin">{spinnerIcon}</div>
     ) : (
       <p className="empty">No draft message</p>
     );
@@ -131,21 +135,21 @@ class Inbox extends Component {
                 Draft
               </Tab>
             </div>
-            <div className="filters">
-              <Checkbox id="all" name="filter" icon={inboxIcon}>
+            <form className="filters">
+              <Checkbox id="all" onClick={this.handleFilter} name="filter" icon={inboxIcon}>
                 All
               </Checkbox>
-              <Checkbox id="read" name="filter" icon={sentIcon}>
+              <Checkbox id="read" onClick={this.handleFilter} name="filter" icon={sentIcon}>
                 Read
               </Checkbox>
-              <Checkbox id="unread" name="filter" icon={draftIcon}>
+              <Checkbox id="unread" onClick={this.handleFilter} name="filter" icon={draftIcon}>
                 Unread
               </Checkbox>
-            </div>
+            </form>
             <div className={`msgcontainer ${switchState}`}>
-              <div className="inboxDiv">{messageList}</div>
-              <div className="sentDiv">{sentList}</div>
-              <div className="draftDiv">{draftList}</div>
+              <div className="inboxDiv">{inboxLoading ? loader : messageList}</div>
+              <div className="sentDiv">{sentLoading ? loader : sentList}</div>
+              <div className="draftDiv">{draftLoading ? loader : draftList}</div>
             </div>
           </div>
           <div className="msgContent" />
@@ -158,6 +162,7 @@ class Inbox extends Component {
 const mapStateToProps = ({ inboxReducer, sentReducer, draftReducer }) => ({
   messages: inboxReducer.messages,
   inboxLoading: inboxReducer.isLoading,
+  inboxType: inboxReducer.type,
   sentMessages: sentReducer.messages,
   sentLoading: sentReducer.isLoading,
   draftMessages: draftReducer.messages,
