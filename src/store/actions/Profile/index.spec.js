@@ -92,7 +92,7 @@ describe.only('Profile Actions', () => {
     });
 
     test('should update user and call update actions without image', async () => {
-      const expectedActions = ['UPDATE_START', 'UPDATE_SUCCESS', 'SET_USER'];
+      const expectedActions = ['UPDATE_START', 'SET_USER', 'UPDATE_SUCCESS'];
       axiosCall.mockResolvedValue({
         data: {
           user: { ...user },
@@ -105,7 +105,7 @@ describe.only('Profile Actions', () => {
     });
 
     test('should update user and call update actions with image', async () => {
-      const expectedActions = ['UPDATE_START', 'UPDATE_SUCCESS', 'SET_USER'];
+      const expectedActions = ['UPDATE_START', 'SET_USER', 'UPDATE_SUCCESS'];
       axiosCall.mockResolvedValue({
         data: {
           user: { ...user },

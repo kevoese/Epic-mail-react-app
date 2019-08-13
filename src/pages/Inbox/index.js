@@ -13,9 +13,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { getInboxAction } from '@actions/Inbox';
 import MessageBox from '@components/MessageBox';
+import MessageView from '@components/MessageView';
 import './Inbox.scss';
 import { getdraftAction } from '@actions/Draft';
 import { getsentAction } from '@actions/Sent';
+import { viewMsgAction } from '@actions/SpecificMessage';
 
 const inboxIcon = <FontAwesomeIcon icon={faInbox} />;
 const sentIcon = <FontAwesomeIcon icon={faPaperPlane} />;
@@ -64,6 +66,14 @@ class Inbox extends Component {
     }
   }
 
+  handleView = (event) => {
+    const msgBox = event.target.parentElement;
+    if (msgBox.classList[0] === 'messageBox') {
+      const { id } = msgBox;
+      this.props.viewMsg(id);
+    }
+  }
+
   render() {
     const { switchState } = this.state;
     const {
@@ -73,31 +83,35 @@ class Inbox extends Component {
       sentLoading,
       inboxLoading,
       draftLoading,
+      viewLoading,
+      specificMsg,
     } = this.props;
 
     const loader = <div className="spin">{spinnerIcon}</div>;
 
     const messageList = messages && messages.length >= 1 ? (
       messages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} />
+        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
       ))
     ) : (
       <p className="empty">No Inbox message</p>
     );
     const sentList = sentMessages && sentMessages.length >= 1 ? (
       sentMessages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} />
+        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
       ))
     ) : (
       <p className="empty">No sent message</p>
     );
     const draftList = draftMessages && draftMessages.length >= 1 ? (
       draftMessages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} />
+        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
       ))
     ) : (
       <p className="empty">No draft message</p>
     );
+
+    const specificMsgDiv = specificMsg ? <MessageView messageObj={specificMsg} /> : '';
 
     return (
       <div className="inbox">
@@ -152,14 +166,20 @@ class Inbox extends Component {
               <div className="draftDiv">{draftLoading ? loader : draftList}</div>
             </div>
           </div>
-          <div className="msgContent" />
+          <div className="thread">
+            <div className="msgContent">
+              {viewLoading ? loader : specificMsgDiv}
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ inboxReducer, sentReducer, draftReducer }) => ({
+const mapStateToProps = ({
+  inboxReducer, sentReducer, draftReducer, authReducer, specificMsgReducer,
+}) => ({
   messages: inboxReducer.messages,
   inboxLoading: inboxReducer.isLoading,
   inboxType: inboxReducer.type,
@@ -167,12 +187,16 @@ const mapStateToProps = ({ inboxReducer, sentReducer, draftReducer }) => ({
   sentLoading: sentReducer.isLoading,
   draftMessages: draftReducer.messages,
   draftLoading: draftReducer.isLoading,
+  specificMsg: specificMsgReducer.messages,
+  viewLoading: specificMsgReducer.isLoading,
+  user: authReducer.user,
 });
 
 const mapDispatchToProps = {
   getInbox: getInboxAction,
   getDraft: getdraftAction,
   getSent: getsentAction,
+  viewMsg: viewMsgAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Inbox);

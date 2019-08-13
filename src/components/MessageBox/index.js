@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser, faEnvelopeOpen, faEnvelope, faTrashAlt,
@@ -6,7 +6,7 @@ import {
 import './index.scss';
 import Moment from 'react-moment';
 
-const messagepanel = ({ messageObj }) => {
+const messagepanel = ({ messageObj, onClick }) => {
   const {
     message_id, firstname, lastname, message, subject, created_on,
   } = messageObj;
@@ -21,26 +21,30 @@ const messagepanel = ({ messageObj }) => {
   // const groupnamehtml = (groupName) ? `<p class="groupname_msg icon">${groupName}</p>` : ' ';
 
   return (
-    <div id={`${message_id}_small`} className={`messageBox ${status}msg`}>
-      { status ? <div className="icon msgStatus">{ status === 'read' ? readIcon : unreadIcon }</div> : ''}
-      <div className="username">
-        <span className="icon">{userIcon}</span>
-        <p>{`${firstname} ${lastname}`}</p>
-      </div>
-      {/* {groupnamehtml} */}
-      <p className="msgdate">
-        {dateStr}
-      </p>
-      <p className="msgtitle">
-        {subject}
-      </p>
-      <p className="msgcontent">
-        {message}
-      </p>
-      <div className="deletediv">
-        <span className="icon">{deleteIcon}</span>
-      </div>
-    </div>
+    <Fragment>
+      <input type="radio" id={`${message_id}msgBox`} name="msgBox" className="msgBoxInput" />
+      <label htmlFor={`${message_id}msgBox`} id={`${message_id}_small`} onClick={onClick} className={`messageBox ${status}msg`}>
+        { status ? <div className="icon msgStatus">{ status === 'read' ? readIcon : unreadIcon }</div> : ''}
+        <div className="username">
+          <span className="icon">{userIcon}</span>
+          {`${firstname} ${lastname}`}
+        </div>
+        {/* {groupnamehtml} */}
+        <p className="groupname"> </p>
+        <p className="msgdate">
+          {dateStr}
+        </p>
+        <p className="msgtitle">
+          {subject}
+        </p>
+        <p className="msgcontent">
+          {message}
+        </p>
+        <div className="deletediv">
+          <span className="icon">{deleteIcon}</span>
+        </div>
+      </label>
+    </Fragment>
   );
 };
 

@@ -21,6 +21,7 @@
 
   p {
     margin: 0 5px;
+    white-space: nowrap;
   }
 
   .msgStatus {
@@ -34,7 +35,7 @@
 
   .username {
     grid-row: 1/2;
-    grid-column: 1/9;
+    grid-column: 1/10;
     position: relative;
     font-weight: 500;
     font-size: 0.95em;
@@ -43,16 +44,28 @@
     color: #747579;
     display: inline-flex;
     
-    p {
-     margin-right: 0.5em;
-    }
-
     span {
       left: 0;
       top: 35%;
       font-size: 0.9em;
+      margin-right: 0.5em;
       color: #747579;
     }
+  }
+
+  .groupname {
+    grid-row: 1/2;
+    grid-column: 10/16;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 0.9em;
+    font-weight: bold;
+    position: relative;
+    padding: 10px 23px 0;
+    color: #747579;
   }
 
   .msgtitle {
@@ -102,6 +115,13 @@
         color: var(--myColor);
       }
     }
+  }
+}
+
+.msgBoxInput {
+  display: none;
+  &:checked + label{
+    border-left-color: var(--myColor);
   }
 }
 

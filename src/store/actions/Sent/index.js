@@ -35,8 +35,9 @@ export const getsentAction = () => async (dispatch) => {
   try {
     await dispatch(sentPending());
     const res = await axiosCall({ path: 'messages/sent', method: 'get' });
-    const messages = res && res.data;
+    let messages = res && res.data;
 
+    if (!Array.isArray(messages)) messages = null;
     dispatch(sentSuccess(messages));
   } catch ({ response, message }) {
     /* istanbul ignore next */

@@ -253,9 +253,10 @@ class Access extends Component {
               icon={passwordIcon}
               onChange={this.handleChange}
               classes="passwrd"
-              pattern="^[\w@.]{7,20}$"
+              pattern="^[\w@._-]{7,20}$"
               type="password"
               placeholder="Password"
+              title="Password must be alphanumeric (-@. and _ are also included) and must contain 7 to 20 characters long"
               required
             />
             <Button isSubmitting={isLoading} type="submit" classes="">

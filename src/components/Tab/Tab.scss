@@ -27,8 +27,8 @@
     display: none;
   }
   input:checked + label {
-    color: #00349c;
-    border-color: #00349c;
+    color: var(--myColor);
+    border-color: var(--myColor);
   }
   
 }

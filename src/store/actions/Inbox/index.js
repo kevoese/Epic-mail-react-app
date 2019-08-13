@@ -46,7 +46,9 @@ export const getInboxAction = ({ type }) => async (dispatch) => {
         res = await axiosCall({ path: 'messages', method: 'get' });
         break;
     }
-    const messages = res && res.data;
+    let messages = res && res.data;
+
+    if (!Array.isArray(messages)) messages = null;
     dispatch(inboxSuccess({ messages, type }));
   } catch ({ response, message }) {
     /* istanbul ignore next */
