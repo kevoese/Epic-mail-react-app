@@ -7,6 +7,7 @@ import profileReducer from '@reducers/Profile';
 import inboxReducer from '@reducers/Inbox';
 import sentReducer from '@reducers/Sent';
 import draftReducer from '@reducers/Draft';
+import specificMsgReducer from '@reducers/SpecificMessage';
 
 const reducers = combineReducers({
   signUpReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   inboxReducer,
   sentReducer,
   draftReducer,
+  specificMsgReducer,
 });
 
 export default reducers;

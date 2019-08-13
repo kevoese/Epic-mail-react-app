@@ -4,7 +4,8 @@
   flex-direction: column;
   transform: translateY(8vh);
   border-top: 1px solid #c4c4c4;
-
+  
+  
   .spin {
     font-size: 2em;
     position: absolute;
@@ -103,12 +104,19 @@
         display: flex;
       }
     }
-    .msgContent {
-     width: 65%;
+    .thread {
+      padding: 0.5em 0.2em 0.3em;
+      width: 65%;
      position: relative;
+     
+    .msgContent {
+     position: relative;
+     height: 100%;
      background: url(../../images/message.png) center no-repeat;
      background-size: 30%;
     }
+    }
+    
  }
 
 }

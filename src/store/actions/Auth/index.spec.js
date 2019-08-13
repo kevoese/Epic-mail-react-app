@@ -35,7 +35,7 @@ describe('Auth Actions', () => {
           ...initialState,
           user,
           token,
-          isLoggedIn: true,
+          isLoggedIn: undefined,
           isStarting: false,
         },
       });

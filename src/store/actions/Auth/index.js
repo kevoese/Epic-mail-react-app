@@ -18,7 +18,7 @@ export const setUser = ({ user, token }) => ({
   payload: {
     token: token || localStorage.token,
     user,
-    isLoggedIn: token && true,
+    isLoggedIn: localStorage.token && true,
     isStarting: false,
   },
 });

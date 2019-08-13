@@ -46,9 +46,9 @@ export const updateAction = {
         res = await axiosCall({ path: 'user/update', method: 'PUT', payload });
       }
       const userData = res && res.data;
-      await dispatch(updateSuccess());
-      saveUser({ user: userData });
+      await saveUser({ user: userData });
       await dispatch(setUser({ user: userData }));
+      await dispatch(updateSuccess(userData));
     } catch ({ response, message }) {
       /* istanbul ignore next */
       if (response) {

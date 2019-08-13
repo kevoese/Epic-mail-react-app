@@ -36,7 +36,7 @@
     display: none;
   }
   input:checked + label {
-    color: #00349c;
+    color: var(--myColor);
   }
   input:checked + label .checked {
     display: block;
