@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tab from '@components/Tab';
+import Compose from '@components/Compose';
 import Checkbox from '@components/Checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -10,6 +11,7 @@ import {
   faPaperPlane,
   faUsers,
   faSpinner,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { getInboxAction } from '@actions/Inbox';
 import MessageBox from '@components/MessageBox';
@@ -22,12 +24,14 @@ import { viewMsgAction } from '@actions/SpecificMessage';
 const inboxIcon = <FontAwesomeIcon icon={faInbox} />;
 const sentIcon = <FontAwesomeIcon icon={faPaperPlane} />;
 const draftIcon = <FontAwesomeIcon icon={faEdit} />;
+const plusIcon = <FontAwesomeIcon icon={faPlus} />;
 const spinnerIcon = <FontAwesomeIcon icon={faSpinner} spin />;
 
 class Inbox extends Component {
   state = {
     user: this.props.user,
     switchState: 'showInbox',
+    showCompose: false,
   };
 
   componentDidMount() {
@@ -58,6 +62,18 @@ class Inbox extends Component {
         break;
     }
   };
+
+  openCompose = () => {
+    this.setState({
+      showCompose: true,
+    });
+  }
+
+  hideCompose = () => {
+    this.setState({
+      showCompose: false,
+    });
+  }
 
   handleFilter = (event) => {
     const { id } = event.target;
@@ -167,8 +183,12 @@ class Inbox extends Component {
             </div>
           </div>
           <div className="thread">
+            { !this.state.showCompose ? ' ' : <Compose close={this.hideCompose} />}
             <div className="msgContent">
               {viewLoading ? loader : specificMsgDiv}
+            </div>
+            <div onClick={this.openCompose} className="plus">
+              {plusIcon}
             </div>
           </div>
         </div>
