@@ -1,11 +1,24 @@
 .inbox {
   min-height: 92vh;
   max-height: 92vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   transform: translateY(8vh);
   border-top: 1px solid #c4c4c4;
-  
+  z-index: 20;
+
+  .hamburger {
+    transform: translate( 0.4em, 20%);
+    display: none;
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+    @media screen and (max-width: 870px) {
+      display: block;
+      width: fit-content;
+    }
+  }
   .spin {
     font-size: 2em;
     position: absolute;
@@ -32,14 +45,42 @@
 
  .wrapper{
    display: inline-flex;
-   max-height: 92vh;
+   flex-grow: 1;
+   position: relative;
+
+   .show {
+    
+     @media screen and (max-width: 870px) {
+      transform: translateX(0);
+    }
+   }
+
+   .hide {
+      @media screen and (max-width: 870px) {
+        transform: translateX(-110%);
+      }
+   }
+    
    .msgTabs {
      width: 35%;
+     min-width: 450px;
      background-color: #f5f6f8;
      border-right: 1px solid #c4c4c4;
      display: flex;
      flex-direction: column;
      overflow: hidden;
+     z-index: 500;
+
+
+     @media screen and (max-width: 870px) {
+      width: 100%;
+      max-width: 500px;
+      position: absolute;
+      transition: transform 0.4s ease-out;
+    }
+    @media screen and (max-width: 500px) {
+      min-width: 350px;
+    }
      .msgcontainer {
       display: flex;
       flex-direction: row;
@@ -114,7 +155,23 @@
       max-height: 92vh;
       overflow-y: scroll;
       position: relative;
-
+      
+      .overlay {
+        display: none;
+        @media screen and (max-width: 870px) {
+          display: inline;
+         background-color: rgba(0, 0, 0, 0.7);
+         position: absolute;
+         z-index: 50;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+        }
+      }
+      @media screen and (max-width: 870px) {
+        width: 100%;
+      }
      .plus {
       position: absolute;
       height: 3.5em;

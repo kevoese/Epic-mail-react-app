@@ -23,7 +23,7 @@ const messagepanel = ({ messageObj, onClick }) => {
   return (
     <Fragment>
       <input type="radio" id={`${message_id}msgBox`} name="msgBox" className="msgBoxInput" />
-      <label htmlFor={`${message_id}msgBox`} id={`${message_id}_small`} onClick={onClick} className={`messageBox ${status}msg`}>
+      <label htmlFor={`${message_id}msgBox`} name="inboxmsg" id={`${message_id}_small`} onClick={onClick} className={`messageBox ${status}msg`}>
         { status ? <div className="icon msgStatus">{ status === 'read' ? readIcon : unreadIcon }</div> : ''}
         <div className="username">
           <span className="icon">{userIcon}</span>

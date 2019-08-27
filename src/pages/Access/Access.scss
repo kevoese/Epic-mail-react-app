@@ -190,6 +190,10 @@
             text-align: center;
             margin: 0.5em 0;
           }
+
+          @media screen and (max-width: 870px) {
+            display: none;
+          }
         }
 
         .logHere {
@@ -206,6 +210,11 @@
         .hideElement {
           transform: scale(0);
           opacity: 0;
+        }
+
+        @media screen and (max-width: 870px) {
+          min-width: 400px;
+          width: fit-content;
         }
       }
 }
