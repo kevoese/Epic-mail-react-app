@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser, faEnvelope, faLock,
-} from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import './Access.scss';
 import Button from '@components/Button';
@@ -26,7 +24,7 @@ class Access extends Component {
       logEmail: '',
       logPassword: '',
     },
-  }
+  };
 
   async componentWillUnmount() {
     const { signInCleanUp, signUpCleanUp } = this.props;
@@ -99,9 +97,7 @@ class Access extends Component {
       },
     } = this.state;
 
-    const {
-      registerUser, loginUser,
-    } = this.props;
+    const { registerUser, loginUser } = this.props;
 
     const { id } = event.target;
 
@@ -121,7 +117,7 @@ class Access extends Component {
     }
 
     this.resetForm();
-  }
+  };
 
   switchForms = () => {
     this.setState({
@@ -137,21 +133,14 @@ class Access extends Component {
     }));
   };
 
-
   render() {
     const userIcon = <FontAwesomeIcon icon={faUser} />;
     const emailIcon = <FontAwesomeIcon icon={faEnvelope} />;
     const passwordIcon = <FontAwesomeIcon icon={faLock} />;
 
-    const {
-      slideDelay,
-      signupForm,
-      formInfo,
-    } = this.state;
+    const { slideDelay, signupForm, formInfo } = this.state;
 
-    const {
-      isLoading,
-    } = this.props;
+    const { isLoading } = this.props;
 
     const {
       firstname,
@@ -166,12 +155,27 @@ class Access extends Component {
     return (
       <div className="accessBg">
         <div className="backgnd">
-          <svg width="500" height="291" viewBox="0 0 545 291" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M539.64 6.59729C539.64 58.5524 556.587 333.916 530.211 285.264C352.924 10.9313 77.5 157 0 0C122.102 0 148.947 0.000205648 288.493 0.000205648C428.039 0.000205648 519.165 5.8651e-05 539.64 6.59729Z" fill="#2660d3" fillOpacity="0.95" />
+          <svg
+            width="500"
+            height="291"
+            viewBox="0 0 545 291"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M539.64 6.59729C539.64 58.5524 556.587 333.916 530.211 285.264C352.924 10.9313 77.5 157 0 0C122.102 0 148.947 0.000205648 288.493 0.000205648C428.039 0.000205648 519.165 5.8651e-05 539.64 6.59729Z"
+              fill="#2660d3"
+              fillOpacity="0.95"
+            />
           </svg>
         </div>
         <div className="formswrap">
-          <Form onSubmit={this.handleSubmit} isSubmitting={isLoading} id="formLogin">
+          <Form
+            onSubmit={this.handleSubmit}
+            isSubmitting={isLoading}
+            id="formLogin"
+            classes={signupForm ? 'hide' : 'show'}
+          >
             <Input
               id="logEmail"
               value={logEmail}
@@ -196,11 +200,16 @@ class Access extends Component {
             <Button isSubmitting={isLoading} type="submit" classes="">
               LOGIN
             </Button>
+            <div className="mobilebtn">
+              <p>Not a member?</p>
+              <span onClick={this.switchForms} className="mobilereg">Register here</span>
+            </div>
           </Form>
           <Form
             onSubmit={this.handleSubmit}
             isSubmitting={isLoading}
             id="formRegister"
+            classes={signupForm ? 'show' : 'hide'}
             signup
           >
             <Input
@@ -259,6 +268,10 @@ class Access extends Component {
               title="Password must be alphanumeric (-@. and _ are also included) and must contain 7 to 20 characters long"
               required
             />
+            <div className="mobilebtn">
+              <p>Already a member?</p>
+              <span onClick={this.switchForms} className="mobilelog">Login here</span>
+            </div>
             <Button isSubmitting={isLoading} type="submit" classes="">
               SIGN UP NOW
             </Button>
@@ -326,6 +339,5 @@ const mapDispatchToProps = {
   signUpCleanUp: registerAction.cleanUp,
   signInCleanUp: loginAction.cleanUp,
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Access);

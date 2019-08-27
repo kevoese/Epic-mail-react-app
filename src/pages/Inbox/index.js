@@ -32,12 +32,25 @@ class Inbox extends Component {
     user: this.props.user,
     switchState: 'showInbox',
     showCompose: false,
+    showMsgBox: false,
   };
+
+  msgboxRef = React.createRef();
+
+  hamburgerRef = React.createRef();
 
   componentDidMount() {
     this.props.getInbox({ type: 'all' });
     this.props.getSent();
     this.props.getDraft();
+  }
+
+  componentDidUpdate() {
+    document.addEventListener('click', this.closeInbox);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.closeInbox);
   }
 
   handleSwitch = (event) => {
@@ -67,20 +80,50 @@ class Inbox extends Component {
     this.setState({
       showCompose: true,
     });
-  }
+  };
 
   hideCompose = () => {
     this.setState({
       showCompose: false,
     });
-  }
+  };
+
+  openInbox = () => {
+    this.setState({
+      showMsgBox: true,
+    });
+  };
+
+  closeInbox = (e) => {
+    if (e.target.parentElement.getAttribute('name') === 'inboxmsg') {
+      this.setState({
+        showMsgBox: false,
+      });
+      return;
+    }
+
+    if (
+      (this.msgboxRef.current && this.msgboxRef.current.contains(e.target))
+      || (this.hamburgerRef.current
+        && this.hamburgerRef.current.contains(e.target))
+    ) {
+      this.setState({
+        showMsgBox: true,
+      });
+      return;
+    }
+
+    this.setState({
+      showMsgBox: false,
+    });
+  };
 
   handleFilter = (event) => {
     const { id } = event.target;
     if (this.props.inboxType !== id) {
       this.props.getInbox({ type: id });
     }
-  }
+  };
 
   handleView = (event) => {
     const msgBox = event.target.parentElement;
@@ -88,10 +131,10 @@ class Inbox extends Component {
       const { id } = msgBox;
       this.props.viewMsg(id);
     }
-  }
+  };
 
   render() {
-    const { switchState } = this.state;
+    const { switchState, showMsgBox } = this.state;
     const {
       messages,
       sentMessages,
@@ -105,34 +148,62 @@ class Inbox extends Component {
 
     const loader = <div className="spin">{spinnerIcon}</div>;
 
-    const messageList = messages && messages.length >= 1 ? (
-      messages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
+    const messageList = messages && messages.length >= 1
+      ? messages.map(msg => (
+        <MessageBox
+          key={msg.message_id}
+          messageObj={msg}
+          onClick={this.handleView}
+        />
       ))
-    ) : (
-      <p className="empty">No Inbox message</p>
-    );
-    const sentList = sentMessages && sentMessages.length >= 1 ? (
-      sentMessages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
+      : <p className="empty">No Inbox message</p>;
+    const sentList = sentMessages && sentMessages.length >= 1
+      ? sentMessages.map(msg => (
+        <MessageBox
+          key={msg.message_id}
+          messageObj={msg}
+          onClick={this.handleView}
+        />
       ))
-    ) : (
-      <p className="empty">No sent message</p>
-    );
-    const draftList = draftMessages && draftMessages.length >= 1 ? (
-      draftMessages.map(msg => (
-        <MessageBox key={msg.message_id} messageObj={msg} onClick={this.handleView} />
+      : <p className="empty">No sent message</p>;
+    const draftList = draftMessages && draftMessages.length >= 1
+      ? draftMessages.map(msg => (
+        <MessageBox
+          key={msg.message_id}
+          messageObj={msg}
+          onClick={this.handleView}
+        />
       ))
-    ) : (
-      <p className="empty">No draft message</p>
-    );
+      : <p className="empty">No draft message</p>;
 
-    const specificMsgDiv = specificMsg ? <MessageView messageObj={specificMsg} /> : '';
+    const specificMsgDiv = specificMsg
+      ? <MessageView messageObj={specificMsg} />
+      : '';
 
     return (
       <div className="inbox">
+        <div
+          ref={this.hamburgerRef}
+          onClick={this.openInbox}
+          className="hamburger"
+        >
+          <svg
+            width="19"
+            height="17"
+            viewBox="0 0 19 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="19" height="3" fill="#2660D3" />
+            <rect y="14" width="19" height="3" fill="#2660D3" />
+            <rect y="7" width="19" height="3" fill="#2660D3" />
+          </svg>
+        </div>
         <div className="wrapper">
-          <div className="msgTabs">
+          <div
+            ref={this.msgboxRef}
+            className={`msgTabs ${showMsgBox ? 'show' : 'hide'}`}
+          >
             <div className="groupLink">
               <span>View groups</span>
               <div>
@@ -166,24 +237,46 @@ class Inbox extends Component {
               </Tab>
             </div>
             <form className="filters">
-              <Checkbox id="all" onClick={this.handleFilter} name="filter" icon={inboxIcon}>
+              <Checkbox
+                id="all"
+                onClick={this.handleFilter}
+                name="filter"
+                icon={inboxIcon}
+              >
                 All
               </Checkbox>
-              <Checkbox id="read" onClick={this.handleFilter} name="filter" icon={sentIcon}>
+              <Checkbox
+                id="read"
+                onClick={this.handleFilter}
+                name="filter"
+                icon={sentIcon}
+              >
                 Read
               </Checkbox>
-              <Checkbox id="unread" onClick={this.handleFilter} name="filter" icon={draftIcon}>
+              <Checkbox
+                id="unread"
+                onClick={this.handleFilter}
+                name="filter"
+                icon={draftIcon}
+              >
                 Unread
               </Checkbox>
             </form>
             <div className={`msgcontainer ${switchState}`}>
-              <div className="inboxDiv">{inboxLoading ? loader : messageList}</div>
-              <div className="sentDiv">{sentLoading ? loader : sentList}</div>
-              <div className="draftDiv">{draftLoading ? loader : draftList}</div>
+              <div name="inboxmsg" className="inboxDiv">
+                {inboxLoading ? loader : messageList}
+              </div>
+              <div name="inboxmsg" className="sentDiv">{sentLoading ? loader : sentList}</div>
+              <div name="inboxmsg" className="draftDiv">
+                {draftLoading ? loader : draftList}
+              </div>
             </div>
           </div>
           <div className="thread">
-            { !this.state.showCompose ? ' ' : <Compose close={this.hideCompose} />}
+            { showMsgBox ? <div className="overlay" /> : ''}
+            {!this.state.showCompose
+              ? ' '
+              : <Compose close={this.hideCompose} />}
             <div className="msgContent">
               {viewLoading ? loader : specificMsgDiv}
             </div>
@@ -198,7 +291,11 @@ class Inbox extends Component {
 }
 
 const mapStateToProps = ({
-  inboxReducer, sentReducer, draftReducer, authReducer, specificMsgReducer,
+  inboxReducer,
+  sentReducer,
+  draftReducer,
+  authReducer,
+  specificMsgReducer,
 }) => ({
   messages: inboxReducer.messages,
   inboxLoading: inboxReducer.isLoading,

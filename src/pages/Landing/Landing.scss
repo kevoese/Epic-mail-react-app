@@ -9,6 +9,7 @@
 .bg-color {
   background-color: #fcfcfc;
 }
+
 .landing-page {
   align-items: center;
   justify-content: center;
@@ -21,7 +22,18 @@
     position: absolute;
     z-index: 0;
     top: -1em;
-    right: -2em;
+    right: 0em;
+    width: 500px;
+    overflow-x: hidden;
+    svg {
+      transform: translateX(2em);
+      @media screen and (max-width: 400px) {
+        transform: translateX(-2em);
+      }
+    }
+    @media screen and (max-width: 400px) {
+      width: 400px;
+    }
   }
   .container {
     position: relative;
@@ -52,6 +64,10 @@
           font-size: 6em;
           margin: 50px auto 20px;
           text-shadow: 2px 2px 5px rgba(209, 255, 255, 0.6);
+          @media screen and (max-width: 700px) {
+            font-size: 4em;
+            text-align: center;
+          }
         }
         
         p {
@@ -61,6 +77,10 @@
           font-weight: 100;
           margin: 0px 0px 1.2em;
           color: black;
+
+          @media screen and (max-width: 900px) {
+            font-size: 1.1em;
+          }
         }
        
         .register {
@@ -81,16 +101,35 @@
             .e-icon {
                 right: 10%;
             }
+
           }
           
           .e-icon {
             right: 20%;
-            transition: right linear 0.3s;
+            transition: right linear 0.3s; 
+          }
           
+          @media screen and (max-width: 700px) {
+            margin: 0 auto;
           }
         }
       }
        
     }
   }
+}
+@media screen and (max-width: 900px) {
+  .landing-page {
+  background: url(../../images/bg_img.png) no-repeat;
+  background-size: 40%;
+  background-position: 50% 90%;
+   
+      .pageContent {
+        width: 100% !important;
+        font-size: 0.9em;
+        margin: auto;
+        text-align: center;
+      }
+
+    }
 }

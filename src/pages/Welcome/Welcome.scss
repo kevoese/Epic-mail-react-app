@@ -70,6 +70,10 @@
       text-transform: capitalize;
       color: #2660d3;
       margin: 0 auto;
+
+      @media screen and (max-width: 800px) {
+        font-size: 1em
+       }
     }
 
     .name {
@@ -79,6 +83,10 @@
       margin: 0.4em;
       color: var(--myLightColor);
       padding-bottom: 0.4em;
+
+      @media screen and (max-width: 800px) {
+       font-size: 2em;
+      }
     }
 
     .profilepic {
@@ -87,6 +95,16 @@
       object-fit: cover;
       border-radius: 100%;
       box-shadow: 1px 1px 5px 2px rgba(4, 0, 66, 0.4);
+      
+      @media screen and (max-width: 800px) {
+        width: 12em;
+        height: 12em;
+      }
+
+      @media screen and (max-width: 500px) {
+        width: 10em;
+        height: 10em;
+      }
     }
 
     .upload {
@@ -117,6 +135,11 @@
         transform: translateY(-50%);
         font-size: 0.8em;
       }
+
+      @media screen and (max-width: 800px) {
+        padding: 0.7em 1.5em;
+        font-size: 0.9em
+       }
     }
 
     .savebtn {

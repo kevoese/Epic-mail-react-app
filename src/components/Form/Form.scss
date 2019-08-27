@@ -75,36 +75,44 @@
 
 	h2 {
 		color: var(--myColor);
+		@media screen and (max-width: 870px) {
+			text-align: center;
+		}
 	}
+ .btn {
+	 @media screen and (max-width: 870px) {
+		margin: 0 auto;
+	}
+ }
+	
+	// .mobilebtn {
+	// 	margin: 0.5em;
+	// 	text-align: center;
+	// 	display: none;
+	// 	width: 90%;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// 	font-size: 1em;
+	// 	font-family: cambria;
+	// 	font-style: italic;
+	// 	color: var(--myColor);
+	// }
 
-	.mobilebtn {
-		margin: 0.5em;
-		text-align: center;
-		display: none;
-		width: 90%;
-		justify-content: center;
-		align-items: center;
-		font-size: 1em;
-		font-family: cambria;
-		font-style: italic;
-		color: var(--myColor);
-	}
+	// .mobilebtn span {
+	// 	border: none;
+	// 	background-color: transparent;
+	// 	font-size: 1em;
+	// 	font-family: cambria;
+	// 	font-style: italic;
+	// 	cursor: pointer;
+	// 	color: var(--myColor);
+	// 	padding: 5px;
+	// 	margin-left: 0.2em;
+	// }
 
-	.mobilebtn span {
-		border: none;
-		background-color: transparent;
-		font-size: 1em;
-		font-family: cambria;
-		font-style: italic;
-		cursor: pointer;
-		color: var(--myColor);
-		padding: 5px;
-		margin-left: 0.2em;
-	}
-
-	.mobilebtn span:hover {
-		border-bottom: 1px solid var(--myColor);
-	}
+	// .mobilebtn span:hover {
+	// 	border-bottom: 1px solid var(--myColor);
+	// }
 
 	.slider h3 {
 		font-size: 2em;
@@ -162,6 +170,30 @@
 			&:hover {
 				border-bottom: 1px solid var(--myColor);
 			}
+
+		}
+		@media screen and (max-width: 870px) {
+			display: flex;
+		}
+	}
+}
+
+.show {
+	@media screen and (max-width: 870px) {
+		display: flex;
+	}
+}
+
+.hide {
+	@media screen and (max-width: 870px) {
+		display: none;
+	}
+}
+
+#formRegister {
+	.formcenter {
+		@media screen and (max-width: 870px) {
+			padding: 2em;
 		}
 	}
 }
